@@ -14,8 +14,13 @@ class Process extends Model
     protected $table = 'process';
     protected $dates = ['created'];
 
+    public function actions()
+    {
+        return $this->belongsToMany(Action::class);
+    }
+
     public function getActions()
     {
-        return $this->belongsToMany(Action::class, 'step', 'process_id', 'step');
+        return $this->belongsToMany(Action::class, 'step', 'process_id', 'action_id');
     }
 }

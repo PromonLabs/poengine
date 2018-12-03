@@ -17,9 +17,9 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-md-12">
                 <div id="custom-search-input">
-                    <div class="input-group col-md-6">
+                    <div class="input-group col-md-3">
                         <input type="search" class="form-control"   name="search" id="search" placeholder="Search for order status"
                         value=""
                         autocomplete="off"
@@ -42,7 +42,7 @@
                 <div id="order-list"></div>
             </div>
         </div>
-        <div class="loader" style="display:none;"></div>
+        <div class="loader" style="display:none; z-index:1000; position:absolute; top:30%; left:50%"></div>
     </section>
     <!-- /.content -->
   </div>
@@ -51,6 +51,9 @@
 <style>
     .loader {
         margin:0 auto;
+        z-index:1000;
+        position:relative;
+        top:20%;
         border: 10px solid #fff;
         border-radius: 50%;
         border-top: 10px solid #3498db;
@@ -69,6 +72,10 @@
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+    }
+
+    .content-wrapper {
+        z-index:0;
     }
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>

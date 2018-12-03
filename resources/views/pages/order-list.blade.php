@@ -25,7 +25,7 @@
                     </td>
                     <td>{{ $orderDetail->process->name }}</td>
                     <td><a href="/crm/account/21005025/service/169545">{{ $orderDetail->account_id }}</a></td>
-                    <td>{{ $orderDetail->orderStatus->name }}</td>
+                    <td>{{ $orderDetail->processStatus->name }}</td>
                     <td>{{ $orderDetail->process_type }}</td>
                     <td>{{ $orderDetail->placed_by }}</td>
                     <td>{{ date("d.m.Y", strtotime($orderDetail->created)) }}</td>
@@ -34,7 +34,7 @@
         @endif
     </tbody>
 </table>
-<div class="col-xs-12 col-md-12" style="margin-top:20px;">
+<div style="margin-top:20px;">
     <div id="order-flow"></div>
 </div>
 <style>
@@ -43,9 +43,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".order-row").click(function(){
+            $(".loader").css("display", "block");
             axios.post('order/flow',{ orderId: this.id}).then(response => {
                 console.log( response.data);
                 $("#order-flow").html(response.data);
+                $(".loader").css("display", "none");
             }).catch(function (error) {
                 console.log(error);
             });

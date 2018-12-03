@@ -18,7 +18,7 @@ class ProcessInstance extends Model
         return $this->hasOne(Process::class, 'id', 'process_id');
     }
 
-    public function orderStatus()
+    public function processStatus()
     {
         return $this->hasOne(ProcessInstanceStatus::class, 'id', 'process_instance_status_id');
     }
