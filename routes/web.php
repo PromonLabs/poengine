@@ -21,4 +21,4 @@ Route::post('/order/list', 'OrderController@list')->name('order.list');
 Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
 Route::get('/order', function () {
     return view('pages/order');
-});
+})->name('order');

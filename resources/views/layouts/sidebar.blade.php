@@ -6,10 +6,13 @@
       <ul class="sidebar-menu" data-widget="tree">
         {{-- <li class="header">MAIN NAVIGATION</li> --}}
         <li class="{{ ( Request::segment(1) == '' ) ? 'active' :'' }}">
-            <a href="{{url('/')}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+            <a href="{{url('/')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
         </li>
+        <li class="{{ ( Request::segment(1) == 'order' ) ? 'active' :'' }}">
+                <a href="{!! route('order') !!}"><i class="fa fa-file-text-o"></i><span>Order</span></a>
+            </li>
         <li class="{{ ( Request::segment(1) == 'process' ) ? 'active' :'' }}">
-            <a href="{!! route('process') !!}"><i class="icon mdi mdi-home"></i><span>Process</span></a>
+            <a href="{!! route('process') !!}"><i class="fa fa-list"></i><span>Process</span></a>
         </li>
       </ul>
     </section>
