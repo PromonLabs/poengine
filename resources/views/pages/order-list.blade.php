@@ -20,11 +20,9 @@
                     <td></td>
                     <td>{{ $orderDetail->id }}</td>
                     <td>-</td>
-                    <td>
-                        <a href="/crm/account/21005025">{{ $orderDetail->account_id }}</a>
-                    </td>
+                    <td>{{ $orderDetail->account_id }}</td>
                     <td>{{ $orderDetail->process->name }}</td>
-                    <td><a href="/crm/account/21005025/service/169545">{{ $orderDetail->account_id }}</a></td>
+                    <td>{{ $orderDetail->service_id }}</td>
                     <td>{{ $orderDetail->processStatus->name }}</td>
                     <td>{{ $orderDetail->process_type }}</td>
                     <td>{{ $orderDetail->placed_by }}</td>

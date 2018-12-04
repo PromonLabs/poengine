@@ -17,6 +17,7 @@ class OrderController extends Controller
     public function flow(Request $request)
     {
         $orderActionDetails = ActionInstance::with('actionStatus')->with('action')->whereProcessInstanceId($request->get('orderId'))->orderBy('step', 'asc')->get();
-        return view('pages.order-flow', compact('orderActionDetails'));
+        $offerDetails = ProcessInstance::with('offer')->with('addOns')->whereId($request->get('orderId'))->get();
+        return view('pages.order-flow', compact('orderActionDetails', 'offerDetails'));
     }
 }
