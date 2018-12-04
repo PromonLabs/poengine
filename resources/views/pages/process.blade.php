@@ -42,8 +42,11 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            <?php $i=1; ?>
                                             @foreach ($processDetail->getActions as $action)
-                                                {{ $action->name }} <br>
+                                                <div class="col-md-12">{{ $i }}. {{ $action->name }}</div>
+                                                <div style="clear:both;"></div>
+                                            <?php $i++; ?>
                                             @endforeach
                                         </div>
                                         <div class="modal-footer">

@@ -21,6 +21,6 @@ class Process extends Model
 
     public function getActions()
     {
-        return $this->belongsToMany(Action::class, 'step', 'process_id', 'action_id');
+        return $this->belongsToMany(Action::class, 'step', 'process_id', 'action_id')->orderBy('step', 'asc');
     }
 }
