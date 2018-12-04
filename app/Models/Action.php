@@ -8,7 +8,7 @@ class Action extends Model
 {
     protected $table = 'action';
 
-    public function getActions()
+    public function process()
     {
         return $this->belongsToMany(Process::class);
     }

@@ -18,36 +18,44 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-              <div class="box">
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover">
-                    <thead>
+                <table class="table table-bordered table-hover" style="background-color:#fff;">
+                    <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
                     <tr>
                       <th>Process</th>
                       <th>Description</th>
-                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @if ($processDetails)
                         @foreach ($processDetails as $processDetail)
-                            </tr>
-                                <td>{{ $processDetail['name'] }}</td>
+                            <tr>
+                                <td><a class="" data-toggle="modal" data-target="#{{$processDetail['name']}}" style="cursor:pointer;">{{ $processDetail['name'] }}</a></td>
                                 <td>{{ $processDetail['description'] }}</td>
-                                <td>
-                                @foreach ($processDetail->getActions as $action)
-                                    {{ $action->name }} <br>
-                                @endforeach
-                                </td>
                             </tr>
+                            <div class="modal fade" id="{{$processDetail['name']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Action List</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach ($processDetail->getActions as $action)
+                                                {{ $action->name }} <br>
+                                            @endforeach
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                     </tbody>
-                  </table>
-                </div>
-                <!-- /.box-body -->
-              </div>
+                </table>
             </div>
             <!-- /.col -->
         </div>
