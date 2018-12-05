@@ -27,11 +27,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <?php
-                        header('Content-Type: application/xml');
-                        $output = "<?xml version='1.0' encoding='utf-8' ?> ";
-                        ?>
-                        {{ $output.$offerDetails[0]->placed_order }}
+                        <textarea style="width:100%;height:100%;"><?php print $xml; ?></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

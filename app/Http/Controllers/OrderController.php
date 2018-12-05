@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProcessInstance;
 use App\Models\ActionInstance;
 use App\Models\offer;
+use PrettyXml\Formatter;
 
 class OrderController extends Controller
 {
@@ -23,6 +24,8 @@ class OrderController extends Controller
         if ($offerDetails && $offerDetails[0]->addon_ids) {
             $addons = Offer::whereId($offerDetails[0]->addon_ids[0])->get();
         }
-        return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons'));
+        $formatter = new Formatter();
+        $xml = $formatter->format('<?xml version="1.0" encoding="UTF-8"?>'.$offerDetails[0]->placed_order);
+        return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons', 'xml'));
     }
 }
