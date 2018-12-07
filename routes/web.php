@@ -11,11 +11,16 @@
 |
 */
 
-/* Route::get('/', function () {
-    return view('pages/home');
-}); */
+Route::get('/', function () {
+    return view('pages/login');
+});
 
-Route::get('/', 'HomeController@index')->name('home');
+
+// route to process the form
+Route::post('/home', 'HomeController@index')->name('login');
+
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('logout', 'HomeController@logout')->name('logout');
 Route::get('/process', 'ProcessController@index')->name('process');
 //Route::get('/order/', 'OrderController@index')->name('order');
 Route::post('/order/idlist', 'OrderController@idlist')->name('order.idlist');
