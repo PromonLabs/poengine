@@ -17,6 +17,9 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/process', 'ProcessController@index')->name('process');
+//Route::get('/order/', 'OrderController@index')->name('order');
+Route::post('/order/idlist', 'OrderController@idlist')->name('order.idlist');
+Route::get('/order/orderlist', 'OrderController@orderList')->name('order.orderlist');
 Route::post('/order/list', 'OrderController@list')->name('order.list');
 Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
 Route::get('/order', function () {

@@ -10,9 +10,15 @@ use PrettyXml\Formatter;
 
 class OrderController extends Controller
 {
+    public function orderList(Request $request)
+    {
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')->orderBy('id', 'desc')->take(10)->get();
+        return view('pages.order-list', compact('orderDetails'));
+    }
+
     public function list(Request $request)
     {
-        $orderDetails = ProcessInstance::with('processStatus')->with('process')->whereId($request->get('orderId'))->get();
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')->where('id', 'ilike', $request->get('orderId').'%')->get();
         return view('pages.order-list', compact('orderDetails'));
     }
 
@@ -21,11 +27,22 @@ class OrderController extends Controller
         $orderActionDetails = ActionInstance::with('actionStatus')->with('action')->whereProcessInstanceId($request->get('orderId'))->orderBy('step', 'asc')->get();
         $offerDetails = ProcessInstance::with('offer')->whereId($request->get('orderId'))->get();
 
-        if ($offerDetails && $offerDetails[0]->addon_ids) {
+        $addons = '';
+        if ($offerDetails && $offerDetails[0]->addon_ids && $offerDetails[0]->addon_ids[0] !='') {
             $addons = Offer::whereId($offerDetails[0]->addon_ids[0])->get();
         }
         $formatter = new Formatter();
         $xml = $formatter->format('<?xml version="1.0" encoding="UTF-8"?>'.$offerDetails[0]->placed_order);
         return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons', 'xml'));
+    }
+
+    public function idlist(Request $request)
+    {
+        $orderIdLists = ProcessInstance::where('id', 'like', $request->get('orderId').'%')->take(20)->get(['id']);
+        $idList = '';
+        foreach ($orderIdLists as $orderIdList) {
+            $idList .= '<option value="'.$orderIdList->id.'">'.$orderIdList->id.'</option>';
+        }
+        return $idList;
     }
 }

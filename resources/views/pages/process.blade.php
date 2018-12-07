@@ -44,7 +44,10 @@
                                         <div class="modal-body">
                                             <?php $i=1; ?>
                                             @foreach ($processDetail->getActions as $action)
-                                                <div class="col-md-12">{{ $i }}. {{ $action->name }}</div>
+                                                @if ($i>1)
+                                                    <span class="glyphicon glyphicon-arrow-down" style="left:50%;"></span>
+                                                @endif
+                                                <div style="background: #00a65a;padding: 10px;margin: 10px auto;width:50%; text-align: center;color: #fff;font-weight: bold;"><span style="padding:5px 10px; margin:5px 0px;">STEP {{ $i }}</span><br> {{ $action->name }}</div>
                                                 <div style="clear:both;"></div>
                                             <?php $i++; ?>
                                             @endforeach

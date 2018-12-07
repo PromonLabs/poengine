@@ -47,6 +47,8 @@
                 $("#order-flow").html(response.data);
                 $(".loader").css("display", "none");
             }).catch(function (error) {
+                $(".loader").css("display", "none");
+                $("#order-flow").html('No records to show');
                 console.log(error);
             });
         });

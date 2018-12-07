@@ -1,4 +1,4 @@
-<h3>Order Flow</h3>
+<h3>Order Flow for {{ $offerDetails[0]->id }}</h3>
 <div class="col-md-4" style="padding-left:0px;">
     @if($offerDetails)
         <table class="table table-striped table-hover" style="background:#fff;">
@@ -27,7 +27,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <textarea style="width:100%;height:100%;"><?php print $xml; ?></textarea>
+                        <textarea style="width:100%;height:400px;"><?php print $xml; ?></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -36,7 +36,7 @@
             </div>
         </div>
     @endif
-    @if($offerDetails && $offerDetails[0]->offer)
+    @if($offerDetails && isset($offerDetails[0]->offer))
         <table class="table table-striped table-hover" style="background:#fff;">
             <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
                 <tr>
@@ -55,7 +55,7 @@
         </table>
     @endif
 
-    @if($addons)
+    @if($addons && isset($addons[0]->id))
         <table class="table table-striped table-hover" style="background:#fff;">
             <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
                 <tr>
@@ -92,7 +92,9 @@
                         <td>{{ $orderActionDetail->action->name }}</td>
                         <td class="status-completed step-status-cell" data-step-message="Callback received">{{ $orderActionDetail->actionStatus->name }}</td>
                         <td>
-                            <button type="button" class="skip-order-step-btn small-button" disabled>Skip</button>
+                            @if( $orderActionDetail->actionStatus->name != 'completed')
+                                <button type="button" class="skip-order-step-btn small-button">Skip</button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
