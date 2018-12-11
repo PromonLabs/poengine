@@ -34,7 +34,7 @@
 	<body class="sidebar-mini fixed sidebar-mini-expand-feature skin-green-light">
 		<div class="wrapper">
 			@include('layouts.header')
-			@include('layouts.sidebar')
+			{{-- @include('layouts.sidebar') --}}
             @yield('content')
             @include('layouts.footer')
 

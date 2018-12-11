@@ -1,5 +1,5 @@
 <table class="table table-striped table-hover">
-    <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
+    <thead class="thead-blue">
         <tr>
             <th></th>
             <th>ID</th>

@@ -18,8 +18,8 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-bordered table-hover" style="background-color:#fff;">
-                    <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
+                <table class="table table-striped" >
+                    <thead class="thead-blue" >
                     <tr>
                       <th>Process</th>
                       <th>Description</th>
@@ -35,22 +35,17 @@
                             <div class="modal fade" id="{{$processDetail['name']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header" style="background-color: #3c8dbc; color:#fff;">
-                                            <h3 class="modal-title" id="exampleModalLabel">Action List</h3>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
                                         <div class="modal-body">
                                             <?php $i=1; ?>
+                                            <div id="circle"></div>
                                             @foreach ($processDetail->getActions as $action)
-                                                @if ($i>1)
-                                                    <span class="glyphicon glyphicon-arrow-down" style="left:50%;"></span>
-                                                @endif
-                                                <div style="background: #00a65a;padding: 10px;margin: 10px auto;width:50%; text-align: center;color: #fff;font-weight: bold;"><span style="padding:5px 10px; margin:5px 0px;">STEP {{ $i }}</span><br> {{ $action->name }}</div>
-                                                <div style="clear:both;"></div>
+                                                <hr id="circle-line"></hr>
+                                                <div id="action-step"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP {{ $i }}</span><br> {{ $action->name }}</div>
                                             <?php $i++; ?>
                                             @endforeach
+                                            <hr id="circle-line"></hr>
+                                            <div id="circle"></div>
+                                            <div style="clear:both;"></div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -80,5 +75,48 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  @section('style')
+    <style>
+        #circle {
+            width: 50px;
+            height: 50px;
+            -webkit-border-radius: 25px;
+            -moz-border-radius: 25px;
+            border-radius: 25px;
+            border: 2px solid #000;
+            float:left;
+            position: relative;
+            top:25px;
+        }
+        #circle-line {
+            border: 1px solid#000;
+            float:left;
+            width:20px;
+            position: relative;
+            top:30px;
+        }
+        #action-step {
+            border: 1px solid#000;
+            float:left;
+            /* display:inline-block; */
+            padding: 30px;
+            text-align: center;
+            width:auto;
+        }
+        .modal-dialog {
+            width:auto !important;
+            padding:10% 0px;
+            text-align:center;
+        }
+        .modal-content {
+            padding: 40px 0 0;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        .modal-footer {
+            border:0px;
+        }
+    </style>
+  @endsection
 @endsection
 
