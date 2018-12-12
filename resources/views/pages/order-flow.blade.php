@@ -102,14 +102,12 @@
                     <?php
                     if ($orderActionDetail->actionStatus->name == 'completed') {
                         $box_color = 'green';
-                        $text_color='#fff';
                     }
                     if ($orderActionDetail->actionStatus->name == 'pending') {
                         $box_color = 'red';
-                        $text_color='#fff';
                     }
                     $orderStatus .='<hr id="circle-line"></hr>
-                    <div id="action-step" style="background:'.$box_color.'; color:'.$text_color.';"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP '.$i. '</span><br> '. $orderActionDetail->action->name.'</div>';
+                    <div id="action-step" style="border:1px solid '.$box_color.'; color:'.$text_color.';"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP '.$i. '</span><br> '. $orderActionDetail->action->name.'</div>';
                     $i++; ?>
                 @endforeach
                 <?php $orderStatus .='<hr id="circle-line"></hr>
