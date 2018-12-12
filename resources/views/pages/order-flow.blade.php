@@ -56,8 +56,8 @@
     @endif
 
     @if($addons && isset($addons[0]->id))
-        <table class="table table-striped table-hover" style="background:#fff;">
-            <thead class="thead-blue" style="background-color: #3c8dbc; color:#fff;">
+        <table class="table table-striped table-hover">
+            <thead class="thead-blue">
                 <tr>
                     <th>ID</th>
                     <th>Addons</th>
@@ -107,7 +107,7 @@
                         $box_color = 'red';
                     }
                     $orderStatus .='<hr id="circle-line"></hr>
-                    <div id="action-step" style="border:1px solid '.$box_color.'; color:'.$text_color.';"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP '.$i. '</span><br> '. $orderActionDetail->action->name.'</div>';
+                    <div id="action-step" style="border:2px solid '.$box_color.'; color:'.$text_color.';"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP '.$i. '</span><br> '. $orderActionDetail->action->name.'</div>';
                     $i++; ?>
                 @endforeach
                 <?php $orderStatus .='<hr id="circle-line"></hr>
