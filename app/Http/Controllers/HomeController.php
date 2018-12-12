@@ -87,7 +87,7 @@ class HomeController extends Controller
 
             $ordersCompletedGroupByMonthData = Cache::remember('ordersCompletedGroupByMonth', 10, function () {
                 return DB::select(DB::raw("SELECT date_trunc('month', created) AS date , count(*) AS orders
-                    FROM process_instance where process_instance_status_id = '5' GROUP BY 1 ORDER BY 1 ASC limit 12"));
+                    FROM process_instance where process_instance_status_id = '5' GROUP BY 1 ORDER BY 1 ASC limit 20"));
             });
 
             $ordersCompletedGroupByMonth = collect($ordersCompletedGroupByMonthData);
