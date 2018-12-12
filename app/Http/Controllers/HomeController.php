@@ -15,8 +15,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        if (($request->get('email') == 'poadmin@promon.com' && $request->get('password') == 'test123') || (session('loginsuccess') && session('loginsuccess') == 1)) {
-            session(['loginsuccess'=>1]);
             $orderCount = ProcessInstance::count();
             $completedOrderCount = ProcessInstance::whereProcessInstanceStatusId('5')->count();
             $processingOrderCount = ProcessInstance::whereProcessInstanceStatusId('3')->count();
@@ -100,10 +98,6 @@ class HomeController extends Controller
             });
 
             return view('pages.home', compact('orderCount', 'completedOrderCount', 'processingOrderCount', 'failedOrderCount', 'ordersGroupByDay', 'ordersCompletedGroupByDay', 'orderStatus', 'ordersStatusGroupByYear', 'ordersCompletedGroupByMonth'));
-        } else {
-            session(['loginsuccess'=>0]);
-            return view('pages.login');
-        }
     }
 
     public function logout()

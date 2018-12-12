@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 Route::post('/login', 'LoginController@index')->name('login');
 
-Route::middleware('loginsuccess')->group(function () {
+Route::middleware('loginSuccess')->group(function () {
     // route to process the form
     Route::post('/home', 'HomeController@index')->name('login');
 

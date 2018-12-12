@@ -15,7 +15,7 @@ class SessionLoginSuceess
      */
     public function handle($request, Closure $next)
     {
-        if (session()->has("loginsuccess") && $request->session()->get('loginsuccess')==true) {
+        if (session()->has("loginSuccess") && $request->session()->get('loginSuccess')==true) {
             return $next($request);
         }
         return redirect('/');

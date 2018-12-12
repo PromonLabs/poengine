@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
         ],
-        'loginsuccess' => [\App\Http\Middleware\SessionLoginSuceess::class,],
+        'loginSuccess' => [\App\Http\Middleware\SessionLoginSuceess::class,],
         'api' => [
             'throttle:60,1',
             'bindings',

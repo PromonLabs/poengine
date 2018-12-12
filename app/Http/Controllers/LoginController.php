@@ -16,17 +16,17 @@ class LoginController extends Controller
     public function index(Request $request)
     {
         if (($request->get('email') == 'poadmin@promon.com' && $request->get('password') == 'test123')) {
-            session(['loginsuccess'=>true]);
+            session(['loginSuccess'=>true]);
             return redirect('home');
         } else {
-            session(['loginsuccess'=>false]);
+            session(['loginSuccess'=>false]);
             return view('pages.login');
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Session::flush();
+        $request->session()->flush();
         return redirect()->route('/');
     }
 }
