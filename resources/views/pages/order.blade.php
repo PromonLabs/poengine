@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
   <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -21,7 +22,7 @@
                     <div class="input-group col-md-3">
                             {{-- <input type="text" id="search" list="order-ids" placeholder="Order Id"> --}}
 
-                        <input type="search" class="form-control" list="order-ids"  name="search" id="search" placeholder="Search for order status"
+                        <input type="search" class="form-control" list="order-ids"  v-model="search" v-on:keydown="searchKeyUp"  placeholder="Search for order status"
                         value=""
                         autocomplete="off"
                         autofocus
@@ -30,11 +31,11 @@
                         height="auto"
                         style = "height:40px;" />
                         <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="submit" id="search_bt" >
+                            <button class="btn btn-info btn-lg" type="submit" v-on:click="searchOnClick">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
-                        <datalist id="order-ids"></datalist>
+                        <order-list></order-list>
                     </div>
                 </div>
             </div>
@@ -87,53 +88,4 @@
     }
 </style>
 @endsection
-@section('script')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-<script src="/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-{{-- <script src="/assets/lib/bootbox/bootbox.min.js" type="text/javascript"></script> --}}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#search").keyup(function(){
-            if ($("#search").val() !='') {
-                axios.post('order/idlist',{ orderId: $("#search").val()}).then(response => {
-                    $("#order-ids").html(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
 
-            } else {
-                toShowOrders();
-            }
-        });
-        $("#search_bt").click(function(){
-            if ($("#search").val() !='') {
-                $(".loader").css("display", "block");
-                axios.post('order/list',{ orderId: $("#search").val()}).then(response => {
-                    $("#order-list").html(response.data);
-                    $(".loader").css("display", "none");
-                }).catch(function (error) {
-                    $(".loader").css("display", "none");
-                    console.log(error);
-                });
-            } else {
-                toShowOrders();
-            }
-        });
-
-
-    });
-    $(window).bind("load", function() {
-        toShowOrders();
-});
-    function toShowOrders() {
-        axios.get('order/orderlist').then(response => {
-            $("#order-list").html(response.data);
-            $(".loader").css("display", "none");
-        }).catch(function (error) {
-            $(".loader").css("display", "none");
-            console.log(error);
-        });
-    }
-</script>
-@endsection
