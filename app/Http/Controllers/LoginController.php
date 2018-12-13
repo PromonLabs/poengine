@@ -24,6 +24,15 @@ class LoginController extends Controller
         }
     }
 
+    public function checklogin(Request $request)
+    {
+
+        if ($request->session()->exists('loginSuccess')) {
+            return redirect('home');
+        }
+        return view('pages/login');
+    }
+
     public function logout(Request $request)
     {
         $request->session()->flush();

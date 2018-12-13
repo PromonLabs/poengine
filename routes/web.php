@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages/login');
-});
+Route::get('/', 'LoginController@checklogin')->name('login');
 Route::post('/login', 'LoginController@index')->name('login');
 
 Route::middleware('loginSuccess')->group(function () {
