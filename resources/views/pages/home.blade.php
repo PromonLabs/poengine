@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
+        Dashboard1
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -137,7 +137,11 @@
   <!-- /.content-wrapper -->
 @endsection
 <link rel="stylesheet" type="text/css" href="/assets/lib/morrisjs/morris.css"/>
-
+<style>
+   .main-header, .main-footer, .go-up {
+       display:none;
+   } 
+</style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 <script src="/assets/lib/jquery.sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="/assets/lib/countup/countUp.min.js" type="text/javascript"></script>

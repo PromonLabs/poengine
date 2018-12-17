@@ -52,6 +52,9 @@
 @endsection
 @section('style')
 <style>
+    .main-header, .main-footer, .go-up {
+        display:none;
+    }
     .loader {
         margin:0 auto;
         z-index:1000;
@@ -88,4 +91,3 @@
     }
 </style>
 @endsection
-

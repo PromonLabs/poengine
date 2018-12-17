@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 	<head>
@@ -34,10 +35,10 @@
 	<body class="sidebar-mini fixed sidebar-mini-expand-feature skin-green-light">
 		<div class="wrapper" id="app">
 
-			@include('layouts.header')
+			<app-header></app-header>
 			{{-- @include('layouts.sidebar') --}}
             @yield('content')
-            @include('layouts.footer')
+            <app-footer></app-footer>
 
             <div class="go-up">
                 <a href="#"><i class="fa fa-chevron-up"></i></a>

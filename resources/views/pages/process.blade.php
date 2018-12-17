@@ -77,6 +77,9 @@
   <!-- /.content-wrapper -->
   @section('style')
     <style>
+        .main-header, .main-footer, .go-up {
+            display:none;
+        }
         #circle {
             width: 50px;
             height: 50px;
@@ -119,4 +122,3 @@
     </style>
   @endsection
 @endsection
-

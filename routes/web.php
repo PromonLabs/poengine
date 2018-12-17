@@ -11,12 +11,14 @@
 |
 */
 
+Route::get('/api/{any}', 'SinglePageController@index')->where('any', '.*');
+
 Route::get('/', 'LoginController@checklogin')->name('login');
 Route::post('/login', 'LoginController@index')->name('login');
 
-Route::middleware('loginSuccess')->group(function () {
+//Route::middleware('loginSuccess')->group(function () {
     // route to process the form
-    Route::post('/home', 'HomeController@index')->name('login');
+    //Route::post('/home', 'HomeController@index')->name('login');
 
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('logout', 'HomeController@logout')->name('logout');
@@ -29,4 +31,8 @@ Route::middleware('loginSuccess')->group(function () {
     Route::get('/order', function () {
         return view('pages/order');
     })->name('order');
-});
+//});
+
+Route::get('/test', function () {
+    return view('welcome');
+})->name('test');
