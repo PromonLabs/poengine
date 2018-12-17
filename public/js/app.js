@@ -1458,7 +1458,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     methods: {
         toShowProcessList: function toShowProcessList() {
-            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('process/list', { processName: this.processName }).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('process/list').then(function (response) {
                 $("#process-list").html(response.data);
                 $(".loader").css("display", "none");
             }).catch(function (error) {

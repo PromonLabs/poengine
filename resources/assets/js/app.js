@@ -45,7 +45,7 @@ const app = new Vue({
     },
     methods: {
         toShowProcessList: function() {
-            axios.post('process/list', { processName: this.processName }).then(response => {
+            axios.get('process/list').then(response => {
                 $("#process-list").html(response.data);
                 $(".loader").css("display", "none");
             }).catch(function(error) {

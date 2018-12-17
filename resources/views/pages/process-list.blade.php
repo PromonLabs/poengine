@@ -37,3 +37,12 @@
         @endif
         </tbody>
     </table>
+    <div class="col-sm-12">
+            <div class="pull-right">
+                @if($processDetails->isEmpty())
+                    <div class="well text-center">No record found.</div>
+                @else
+                    @include('commen.paginate', ['paginator' => $processDetails])
+                @endif
+            </div>
+        </div>
