@@ -43,7 +43,7 @@
     $(document).ready(function() {
         $(".orderrow").click(function(){
             $(".loader").css("display", "block");
-            axios.post('order/flow',{ orderId: this.id}).then(response => {
+            axios.post('/order/flow',{ orderId: this.id}).then(response => {
                 console.log( response.data);
                 $("#order-flow").html(response.data);
                 $(".loader").css("display", "none");

@@ -41,44 +41,9 @@ const app = new Vue({
         processName: null,
     },
     mounted() {
-        this.toShowOrders();
+        this.toShowProcessList();
     },
     methods: {
-        searchOnClick: function(event) {
-            if (this.search != '') {
-                $(".loader").css("display", "block");
-                axios.post('order/list', { orderId: this.search }).then(response => {
-                    $("#order-list").html(response.data);
-                    $(".loader").css("display", "none");
-                }).catch(function(error) {
-                    $(".loader").css("display", "none");
-                    console.log(error);
-                });
-            } else {
-                this.toShowOrders();
-            }
-        },
-        toShowOrders: function() {
-            axios.get('order/orderlist').then(response => {
-                $("#order-list").html(response.data);
-                $(".loader").css("display", "none");
-            }).catch(function(error) {
-                $(".loader").css("display", "none");
-                console.log(error);
-            });
-        },
-        searchKeyUp: function() {
-            if (this.search != '') {
-                axios.post('order/id/list', { orderId: this.search }).then(response => {
-                    $("#order-ids").html(response.data);
-                }).catch(function(error) {
-                    console.log(error);
-                });
-
-            } else {
-                this.toShowOrders();
-            }
-        },
         toShowProcessList: function() {
             axios.post('process/list', { processName: this.processName }).then(response => {
                 $("#process-list").html(response.data);

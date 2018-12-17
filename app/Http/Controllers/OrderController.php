@@ -36,7 +36,7 @@ class OrderController extends Controller
         return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons', 'xml'));
     }
 
-    public function idlist(Request $request)
+    public function orderIdList(Request $request)
     {
         $orderIdLists = ProcessInstance::where('id', 'like', $request->get('orderId').'%')->take(20)->get(['id']);
         $idList = '';

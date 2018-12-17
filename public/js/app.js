@@ -1453,44 +1453,10 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         processName: null
     },
     mounted: function mounted() {
-        this.toShowOrders();
+        this.toShowProcessList();
     },
 
     methods: {
-        searchOnClick: function searchOnClick(event) {
-            if (this.search != '') {
-                $(".loader").css("display", "block");
-                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('order/list', { orderId: this.search }).then(function (response) {
-                    $("#order-list").html(response.data);
-                    $(".loader").css("display", "none");
-                }).catch(function (error) {
-                    $(".loader").css("display", "none");
-                    console.log(error);
-                });
-            } else {
-                this.toShowOrders();
-            }
-        },
-        toShowOrders: function toShowOrders() {
-            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('order/orderlist').then(function (response) {
-                $("#order-list").html(response.data);
-                $(".loader").css("display", "none");
-            }).catch(function (error) {
-                $(".loader").css("display", "none");
-                console.log(error);
-            });
-        },
-        searchKeyUp: function searchKeyUp() {
-            if (this.search != '') {
-                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('order/id/list', { orderId: this.search }).then(function (response) {
-                    $("#order-ids").html(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            } else {
-                this.toShowOrders();
-            }
-        },
         toShowProcessList: function toShowProcessList() {
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('process/list', { processName: this.processName }).then(function (response) {
                 $("#process-list").html(response.data);
@@ -15849,6 +15815,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(28)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(69)
@@ -15857,7 +15827,7 @@ var __vue_template__ = __webpack_require__(30)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -15892,8 +15862,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 28 */,
-/* 29 */,
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(29);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("7a960081", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6dcc4948\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Order.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6dcc4948\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Order.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.loader {\n    margin:0 auto;\n    z-index:1000;\n    position:relative;\n    top:20%;\n    border: 10px solid #fff;\n    border-radius: 50%;\n    border-top: 10px solid #3498db;\n    width: 80px;\n    height: 80px;\n    -webkit-animation: spin 2s linear infinite; /* Safari */\n    animation: spin 2s linear infinite;\n}\n\n/* Safari */\n@-webkit-keyframes spin {\n0% { -webkit-transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n.content-wrapper {\n    z-index:0;\n}\n.btn-lg {\n  padding: 7px 16px !important;\n}\n.table {\n    font-weight:normal !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15901,12 +15909,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("iframe", {
-    staticStyle: { height: "100em" },
-    attrs: { width: "100%", src: "/order", frameborder: "0", scrolling: "no" }
-  })
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-xs-12 col-md-12" }, [
+          _c("div", { attrs: { id: "custom-search-input" } }, [
+            _c(
+              "div",
+              { staticClass: "input-group col-md-3" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { height: "40px" },
+                  attrs: {
+                    type: "search",
+                    list: "order-ids",
+                    placeholder: "Search for order status",
+                    value: "",
+                    autocomplete: "off",
+                    autofocus: "",
+                    spellcheck: "false",
+                    tabindex: "0",
+                    height: "auto"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    keyup: _vm.searchKeyUp,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "input-group-btn" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info btn-lg",
+                      attrs: { type: "submit" },
+                      on: { click: _vm.searchOnClick }
+                    },
+                    [_c("i", { staticClass: "glyphicon glyphicon-search" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("order-list")
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "loader",
+        staticStyle: {
+          display: "none",
+          "z-index": "1000",
+          position: "absolute",
+          top: "30%",
+          left: "50%"
+        }
+      })
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("\n       Order\n     ")]),
+      _vm._v(" "),
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "/home" } }, [
+            _c("i", { staticClass: "fa fa-dashboard" }),
+            _vm._v(" Home")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Order")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-xs-12 col-md-12",
+        staticStyle: { "margin-top": "20px" }
+      },
+      [_c("div", { attrs: { id: "order-list" } })]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17254,8 +17370,133 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            search: ''
+        };
+    },
+    mounted: function mounted() {
+        this.toShowOrders();
+    },
+
+    methods: {
+        searchOnClick: function searchOnClick(event) {
+            if (this.search != '') {
+                $(".loader").css("display", "block");
+                axios.post('/order/list', { orderId: this.search }).then(function (response) {
+                    $("#order-list").html(response.data);
+                    $(".loader").css("display", "none");
+                }).catch(function (error) {
+                    $(".loader").css("display", "none");
+                    console.log(error);
+                });
+            } else {
+                this.toShowOrders();
+            }
+        },
+        toShowOrders: function toShowOrders() {
+            axios.get('/order/orderlist').then(function (response) {
+                $("#order-list").html(response.data);
+                $(".loader").css("display", "none");
+            }).catch(function (error) {
+                $(".loader").css("display", "none");
+                console.log(error);
+            });
+        },
+        searchKeyUp: function searchKeyUp() {
+            if (this.search != '') {
+                axios.post('/order/id/list', { orderId: this.search }).then(function (response) {
+                    $("#order-ids").html(response.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                this.toShowOrders();
+            }
+        }
+    }
+});
 
 /***/ }),
 /* 70 */

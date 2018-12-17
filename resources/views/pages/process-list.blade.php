@@ -37,4 +37,3 @@
         @endif
         </tbody>
     </table>
-

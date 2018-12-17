@@ -22,7 +22,7 @@ Route::middleware('loginSuccess')->group(function () {
     Route::post('/home', 'HomeController@index')->name('login');
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('logout', 'HomeController@logout')->name('logout');
-    Route::post('/order/id/list', 'OrderController@idlist')->name('order.id.list');
+    Route::post('/order/id/list', 'OrderController@orderIdList')->name('order.id.list');
     Route::get('/order/orderlist', 'OrderController@orderList')->name('order.orderlist');
     Route::post('/order/list', 'OrderController@list')->name('order.list');
     Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
