@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         if (($request->get('email') == 'poadmin@promon.com' && $request->get('password') == 'test123')) {
             session(['loginSuccess'=>true]);
-            return redirect('home');
+            return redirect('api/home');
         } else {
             session(['loginSuccess'=>false]);
             return view('pages.login');
@@ -28,7 +28,7 @@ class LoginController extends Controller
     {
 
         if ($request->session()->exists('loginSuccess')) {
-            return redirect('home');
+            return redirect('api/home');
         }
         return view('pages/login');
     }

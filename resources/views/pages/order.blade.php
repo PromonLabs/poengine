@@ -22,7 +22,7 @@
                     <div class="input-group col-md-3">
                             {{-- <input type="text" id="search" list="order-ids" placeholder="Order Id"> --}}
 
-                        <input type="search" class="form-control" list="order-ids"  v-model="search" v-on:keydown="searchKeyUp"  placeholder="Search for order status"
+                        <input type="search" class="form-control" list="order-ids"  v-model="search" v-on:keyup="searchKeyUp"  placeholder="Search for order status"
                         value=""
                         autocomplete="off"
                         autofocus

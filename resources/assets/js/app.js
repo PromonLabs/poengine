@@ -38,6 +38,7 @@ const app = new Vue({
     router,
     data: {
         search: null,
+        processName: null,
     },
     mounted() {
         this.toShowOrders();
@@ -68,14 +69,48 @@ const app = new Vue({
         },
         searchKeyUp: function() {
             if (this.search != '') {
-                axios.post('order/idlist', { orderId: this.search }).then(response => {
+                axios.post('order/id/list', { orderId: this.search }).then(response => {
                     $("#order-ids").html(response.data);
                 }).catch(function(error) {
                     console.log(error);
                 });
 
             } else {
-                toShowOrders();
+                this.toShowOrders();
+            }
+        },
+        toShowProcessList: function() {
+            axios.post('process/list', { processName: this.processName }).then(response => {
+                $("#process-list").html(response.data);
+                $(".loader").css("display", "none");
+            }).catch(function(error) {
+                $(".loader").css("display", "none");
+                console.log(error);
+            });
+        },
+        searchProcess: function() {
+            if (this.processName != '') {
+                axios.post('process/name/list', { processName: this.processName }).then(response => {
+                    $("#process-names").html(response.data);
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
+            }
+        },
+        searchProcessOnClick: function() {
+            if (this.processName != '') {
+                $(".loader").css("display", "block");
+                axios.post('process/list', { processName: this.processName }).then(response => {
+                    $("#process-list").html(response.data);
+                    $(".loader").css("display", "none");
+                }).catch(function(error) {
+                    $(".loader").css("display", "none");
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
             }
         }
     }

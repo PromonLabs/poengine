@@ -1449,7 +1449,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     components: { App: __WEBPACK_IMPORTED_MODULE_3__components_App___default.a },
     router: router,
     data: {
-        search: null
+        search: null,
+        processName: null
     },
     mounted: function mounted() {
         this.toShowOrders();
@@ -1481,13 +1482,47 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         },
         searchKeyUp: function searchKeyUp() {
             if (this.search != '') {
-                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('order/idlist', { orderId: this.search }).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('order/id/list', { orderId: this.search }).then(function (response) {
                     $("#order-ids").html(response.data);
                 }).catch(function (error) {
                     console.log(error);
                 });
             } else {
-                toShowOrders();
+                this.toShowOrders();
+            }
+        },
+        toShowProcessList: function toShowProcessList() {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('process/list', { processName: this.processName }).then(function (response) {
+                $("#process-list").html(response.data);
+                $(".loader").css("display", "none");
+            }).catch(function (error) {
+                $(".loader").css("display", "none");
+                console.log(error);
+            });
+        },
+        searchProcess: function searchProcess() {
+            if (this.processName != '') {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('process/name/list', { processName: this.processName }).then(function (response) {
+                    $("#process-names").html(response.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
+            }
+        },
+        searchProcessOnClick: function searchProcessOnClick() {
+            if (this.processName != '') {
+                $(".loader").css("display", "block");
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('process/list', { processName: this.processName }).then(function (response) {
+                    $("#process-list").html(response.data);
+                    $(".loader").css("display", "none");
+                }).catch(function (error) {
+                    $(".loader").css("display", "none");
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
             }
         }
     }
@@ -15789,9 +15824,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("iframe", {
+    staticStyle: { height: "90em" },
     attrs: {
       width: "100%",
-      height: "600",
       src: "/home",
       frameborder: "0",
       scrolling: "no",
@@ -15867,14 +15902,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("iframe", {
-    attrs: {
-      width: "100%",
-      height: "700",
-      src: "/order",
-      frameborder: "0",
-      scrolling: "yes",
-      onload: "this.style.height=this.contentDocument.body.scrollHeight +'px';"
-    }
+    staticStyle: { height: "100em" },
+    attrs: { width: "100%", src: "/order", frameborder: "0", scrolling: "no" }
   })
 }
 var staticRenderFns = []
