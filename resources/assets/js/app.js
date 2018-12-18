@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
 
 Vue.use(axios)
 
@@ -10,10 +13,17 @@ import App from './components/App'
 import Dashboard from './components/pages/Home'
 import Order from './components/pages/Order'
 import Process from './components/pages/Process'
+//import 'bootstrap/dist/css/bootstrap.css'
+//import 'bootstrap-vue/dist/bootstrap-vue.css'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
 Vue.component('app-header', require('./components/layouts/header.vue'));
 Vue.component('app-footer', require('./components/layouts/footer.vue'));
+Vue.component('order-datatable', require('./components/datatable/OrderVueTable.vue'));
 Vue.component('order-list', require('./components/OrderList.vue'));
+Vue.component('b-modal', bModal);
+Vue.directive('b-modal', bModalDirective);
 
 const router = new VueRouter({
     mode: 'history',
