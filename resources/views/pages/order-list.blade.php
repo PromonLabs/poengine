@@ -16,7 +16,7 @@
     <tbody>
         @if($orderDetails)
             @foreach ($orderDetails as $orderDetail)
-                <tr id="{{ $orderDetail->id }}" class="order-row">
+                <tr id="{{ $orderDetail->id }}" class="orderrow">
                     <td></td>
                     <td>{{ $orderDetail->id }}</td>
                     <td>-</td>
@@ -38,11 +38,12 @@
 <style>
  tr {cursor:pointer;}
 </style>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".order-row").click(function(){
+        $(".orderrow").click(function(){
             $(".loader").css("display", "block");
-            axios.post('order/flow',{ orderId: this.id}).then(response => {
+            axios.post('/order/flow',{ orderId: this.id}).then(response => {
                 console.log( response.data);
                 $("#order-flow").html(response.data);
                 $(".loader").css("display", "none");

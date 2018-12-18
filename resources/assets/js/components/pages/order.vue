@@ -1,14 +1,15 @@
-@extends('layouts.app')
-@section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<template>
+ <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Order
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>
+            <router-link :to="'/api/home'" class="logo" exact>
+                <i class="fa fa-dashboard"></i> Home
+            </router-link>
         <li class="active">Order</li>
       </ol>
     </section>
@@ -19,9 +20,7 @@
             <div class="col-xs-12 col-md-12">
                 <div id="custom-search-input">
                     <div class="input-group col-md-3">
-                            {{-- <input type="text" id="search" list="order-ids" placeholder="Order Id"> --}}
-
-                        <input type="search" class="form-control" list="order-ids"  name="search" id="search" placeholder="Search for order status"
+                        <input type="search" class="form-control" list="order-ids"  v-model="search" v-on:keyup="searchKeyUp"  placeholder="Search for order status"
                         value=""
                         autocomplete="off"
                         autofocus
@@ -30,11 +29,11 @@
                         height="auto"
                         style = "height:40px;" />
                         <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="submit" id="search_bt" >
+                            <button class="btn btn-info btn-lg" type="submit" v-on:click="searchOnClick">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
-                        <datalist id="order-ids"></datalist>
+                        <order-list></order-list>
                     </div>
                 </div>
             </div>
@@ -47,9 +46,7 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-@endsection
-@section('style')
+</template>
 <style>
     .loader {
         margin:0 auto;
@@ -86,54 +83,52 @@
         font-weight:normal !important;
     }
 </style>
-@endsection
-@section('script')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-<script src="/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-{{-- <script src="/assets/lib/bootbox/bootbox.min.js" type="text/javascript"></script> --}}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#search").keyup(function(){
-            if ($("#search").val() !='') {
-                axios.post('order/idlist',{ orderId: $("#search").val()}).then(response => {
-                    $("#order-ids").html(response.data);
-                }).catch(function (error) {
-                    console.log(error);
-                });
-
-            } else {
-                toShowOrders();
-            }
-        });
-        $("#search_bt").click(function(){
-            if ($("#search").val() !='') {
+<script>
+    export default {
+       data () {
+    return {
+      search: ''
+    }
+  },
+    mounted() {
+        this.toShowOrders();
+    },
+    methods: {
+        searchOnClick: function(event) {
+            if (this.search != '') {
                 $(".loader").css("display", "block");
-                axios.post('order/list',{ orderId: $("#search").val()}).then(response => {
+                axios.post('/order/list', { orderId: this.search }).then(response => {
                     $("#order-list").html(response.data);
                     $(".loader").css("display", "none");
-                }).catch(function (error) {
+                }).catch(function(error) {
                     $(".loader").css("display", "none");
                     console.log(error);
                 });
             } else {
-                toShowOrders();
+                this.toShowOrders();
             }
-        });
+        },
+        toShowOrders: function() {
+            axios.get('/order/orderlist').then(response => {
+                $("#order-list").html(response.data);
+                $(".loader").css("display", "none");
+            }).catch(function(error) {
+                $(".loader").css("display", "none");
+                console.log(error);
+            });
+        },
+        searchKeyUp: function() {
+            if (this.search != '') {
+                axios.post('/order/id/list', { orderId: this.search }).then(response => {
+                    $("#order-ids").html(response.data);
+                }).catch(function(error) {
+                    console.log(error);
+                });
 
-
-    });
-    $(window).bind("load", function() {
-        toShowOrders();
-});
-    function toShowOrders() {
-        axios.get('order/orderlist').then(response => {
-            $("#order-list").html(response.data);
-            $(".loader").css("display", "none");
-        }).catch(function (error) {
-            $(".loader").css("display", "none");
-            console.log(error);
-        });
+            } else {
+                this.toShowOrders();
+            }
+        }
     }
+}
 </script>
-@endsection

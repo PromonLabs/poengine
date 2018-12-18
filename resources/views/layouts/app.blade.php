@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 	<head>
@@ -8,7 +9,7 @@
 
 		<meta name="keywords" content="PO Engine">
 		<meta name="description" content="PO Engine">
-
+        <meta name="csrf-token" content="{{csrf_token()}}">
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
@@ -32,11 +33,12 @@
         @yield('style')
 	</head>
 	<body class="sidebar-mini fixed sidebar-mini-expand-feature skin-green-light">
-		<div class="wrapper">
-			@include('layouts.header')
+		<div class="wrapper" id="app">
+
+			<app-header></app-header>
 			{{-- @include('layouts.sidebar') --}}
             @yield('content')
-            @include('layouts.footer')
+            <app-footer></app-footer>
 
             <div class="go-up">
                 <a href="#"><i class="fa fa-chevron-up"></i></a>
@@ -57,6 +59,7 @@
 		<script src="{{ asset('assets/dist/js/pages/dashboard2.js') }}"></script>
 		<!-- AdminLTE for demo purposes -->
         <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         @yield('script')
 	</body>
 </html>
