@@ -15910,7 +15910,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-wrapper" }, [
-    _vm._m(0),
+    _c("section", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("\n       Order\n     ")]),
+      _vm._v(" "),
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          [
+            _c(
+              "router-link",
+              { staticClass: "logo", attrs: { to: "/api/home", exact: "" } },
+              [
+                _c("i", { staticClass: "fa fa-dashboard" }),
+                _vm._v(" Home\n           ")
+              ]
+            )
+          ],
+          1
+        ),
+        _c("li", { staticClass: "active" }, [_vm._v("Order")])
+      ])
+    ]),
     _vm._v(" "),
     _c("section", { staticClass: "content" }, [
       _c("div", { staticClass: "row" }, [
@@ -15973,7 +15993,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _c("div", {
@@ -15990,25 +16010,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content-header" }, [
-      _c("h1", [_vm._v("\n       Order\n     ")]),
-      _vm._v(" "),
-      _c("ol", { staticClass: "breadcrumb" }, [
-        _c("li", [
-          _c("a", { attrs: { href: "/home" } }, [
-            _c("i", { staticClass: "fa fa-dashboard" }),
-            _vm._v(" Home")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "active" }, [_vm._v("Order")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -16222,56 +16223,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("header", { staticClass: "main-header" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("nav", { staticClass: "navbar navbar-static-top" }, [
+  return _c(
+    "header",
+    { staticClass: "main-header" },
+    [
       _c(
-        "div",
-        { staticClass: "navbar-custom-menu" },
+        "router-link",
+        { staticClass: "logo", attrs: { to: "/api/home", exact: "" } },
         [
-          _c(
-            "router-link",
-            {
-              staticClass: "navbar-brand",
-              attrs: { to: { name: "dashboard" } }
-            },
-            [_vm._v("Dashboard")]
-          ),
+          _c("span", { staticClass: "logo-mini" }, [
+            _c("b", [_vm._v("P")]),
+            _vm._v("S")
+          ]),
           _vm._v(" "),
-          _c(
-            "router-link",
-            { staticClass: "navbar-brand", attrs: { to: { name: "order" } } },
-            [_vm._v("Order")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            { staticClass: "navbar-brand", attrs: { to: { name: "process" } } },
-            [_vm._v("Process")]
-          )
-        ],
-        1
+          _c("span", { staticClass: "logo-lg" }, [
+            _c("b", [_vm._v("PO Engine")])
+          ])
+        ]
       ),
       _vm._v(" "),
-      _vm._m(1)
-    ])
-  ])
+      _c("nav", { staticClass: "navbar navbar-static-top" }, [
+        _c(
+          "div",
+          { staticClass: "navbar-custom-menu" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "navbar-brand",
+                attrs: { to: { name: "dashboard" } }
+              },
+              [_vm._v("Dashboard")]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "navbar-brand", attrs: { to: { name: "order" } } },
+              [_vm._v("Order")]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "navbar-brand",
+                attrs: { to: { name: "process" } }
+              },
+              [_vm._v("Process")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "logo", attrs: { href: "/home" } }, [
-      _c("span", { staticClass: "logo-mini" }, [
-        _c("b", [_vm._v("P")]),
-        _vm._v("S")
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "logo-lg" }, [_c("b", [_vm._v("PO Engine")])])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -17367,6 +17376,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
