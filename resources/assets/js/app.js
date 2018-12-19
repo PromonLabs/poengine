@@ -21,6 +21,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 Vue.component('app-header', require('./components/layouts/header.vue'));
 Vue.component('app-footer', require('./components/layouts/footer.vue'));
 Vue.component('order-datatable', require('./components/datatable/OrderVueTable.vue'));
+Vue.component('process-datatable', require('./components/datatable/ProcessVueTable.vue'));
 Vue.component('order-list', require('./components/OrderList.vue'));
 Vue.component('b-modal', bModal);
 Vue.directive('b-modal', bModalDirective);

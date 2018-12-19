@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function orderList(Request $request)
     {
-        $orderDetails = ProcessInstance::with('processStatus')->with('process')->orderBy('id', 'desc')->take(10)->get();
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')->orderBy('id', 'desc')->take(30)->get();
         return $orderDetails;
     }
 

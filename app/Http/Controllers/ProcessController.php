@@ -12,7 +12,7 @@ class ProcessController extends Controller
     public function index(Request $request)
     {
         $processDetails = Process::with('getActions')->orderBy('id', 'asc')->paginate(20);
-        return view('pages.process', compact('processDetails'));
+        return $processDetails;
     }
 
     public function processNameList(Request $request)

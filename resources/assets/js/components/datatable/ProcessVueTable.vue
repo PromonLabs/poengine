@@ -1,17 +1,7 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
-    <b-row>
-      <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px;">
-           <span class="input-group-btn">
-               <button class="btn btn-info btn-lg" :disabled="!filter">
-                   <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
-       </div>
-    </b-row>
-<br>
+
     <!-- Main table element -->
     <b-table show-empty
              stacked="md"
@@ -48,16 +38,9 @@ export default {
     return {
       items: items,
       fields: [
-        { key: 'id', label: 'ID', sortable: true},
-        { key: 'external_id', label: 'Parent ID', sortable: true, 'class': 'text-center' },
-        { key: 'account_id', label: 'Account' },
-        { key: 'process.name', label: 'Name' },
-        { key: 'service_id', label: 'Service' },
-        { key: 'process_status.name', label: 'Status' },
-        { key: 'process_type', label: 'Process type' },
-        { key: 'placed_by', label: 'Place by' },
-        { key: 'created', label: 'Preferred date' },
-      ],
+        { key: 'name', label: 'Process', sortable: true},
+        { key: 'description', label: 'Description', sortable: true, 'class': 'text-center' },
+       ],
       currentPage: 1,
       perPage: 10,
       totalRows: items.length,
@@ -66,12 +49,12 @@ export default {
     }
   },
   mounted() {
-        this.toShowOrderList();
+        this.toShowProcessList();
     },
   methods: {
-    toShowOrderList: function ()
+    toShowProcessList: function ()
     {
-        axios.get('/order/orderlist').then(response => {
+        axios.get('/process').then(response => {
                 this.items = response.data;
                 $(".loader").css("display", "none");
             }).catch(function(error) {

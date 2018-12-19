@@ -11851,6 +11851,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app-header', __webpack_require__(235));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app-footer', __webpack_require__(240));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('order-datatable', __webpack_require__(245));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('process-datatable', __webpack_require__(255));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('order-list', __webpack_require__(242));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('b-modal', __WEBPACK_IMPORTED_MODULE_8_bootstrap_vue_es_components_modal_modal__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.directive('b-modal', __WEBPACK_IMPORTED_MODULE_9_bootstrap_vue_es_directives_modal_modal__["a" /* default */]);
@@ -36662,6 +36663,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(258)
+}
 var normalizeComponent = __webpack_require__(13)
 /* script */
 var __vue_script__ = __webpack_require__(229)
@@ -36670,7 +36675,7 @@ var __vue_template__ = __webpack_require__(230)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -36713,6 +36718,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -36724,18 +36755,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("iframe", {
-    attrs: {
-      width: "100%",
-      height: "600",
-      src: "/process",
-      frameborder: "0",
-      scrolling: "no",
-      onload: "this.style.height=this.contentDocument.body.scrollHeight +'px';"
-    }
-  })
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-12 col-md-12",
+            staticStyle: { "margin-top": "20px" }
+          },
+          [_c("process-datatable")],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" })
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("\n       Process\n     ")]),
+      _vm._v(" "),
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "/home" } }, [
+            _c("i", { staticClass: "fa fa-dashboard" }),
+            _vm._v(" Home")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Process")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -37245,9 +37305,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 var items = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37299,7 +37356,6 @@ var items = [];
     expandAdditionalInfo: function expandAdditionalInfo(row) {
       $(".loader").css("display", "block");
       axios.post('/order/flow', { orderId: row.id }).then(function (response) {
-        console.log(response.data);
         $("#order-flow").html(response.data);
         $(".loader").css("display", "none");
       }).catch(function (error) {
@@ -37323,58 +37379,52 @@ var render = function() {
     "b-container",
     { attrs: { fluid: "" } },
     [
-      _c(
-        "b-row",
-        [
-          _c(
-            "b-col",
-            { staticClass: "my-1", attrs: { md: "5" } },
-            [
-              _c(
-                "b-form-group",
-                { staticClass: "mb-0", attrs: { horizontal: "" } },
-                [
-                  _c(
-                    "b-input-group",
-                    [
-                      _c("b-form-input", {
-                        attrs: { placeholder: "Type to Search" },
-                        model: {
-                          value: _vm.filter,
-                          callback: function($$v) {
-                            _vm.filter = $$v
-                          },
-                          expression: "filter"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "b-input-group-append",
-                        [
-                          _c("b-btn", {
-                            staticClass: "glyphicon glyphicon-search",
-                            attrs: { disabled: !_vm.filter },
-                            on: {
-                              click: function($event) {
-                                _vm.filter = ""
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+      _c("b-row", [
+        _c("div", { staticClass: "input-group col-md-3" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filter,
+                expression: "filter"
+              }
             ],
-            1
-          )
-        ],
-        1
-      ),
+            staticClass: "form-control",
+            staticStyle: { height: "40px" },
+            attrs: {
+              type: "search",
+              placeholder: "Search for order",
+              value: "",
+              autocomplete: "off",
+              autofocus: "autofocus",
+              spellcheck: "false",
+              tabindex: "0",
+              height: "auto"
+            },
+            domProps: { value: _vm.filter },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.filter = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "input-group-btn" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info btn-lg",
+                attrs: { disabled: !_vm.filter }
+              },
+              [_c("i", { staticClass: "glyphicon glyphicon-search" })]
+            )
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -37404,6 +37454,31 @@ var render = function() {
       }),
       _vm._v(" "),
       _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            { staticClass: "my-1", attrs: { md: "6" } },
+            [
+              _c("b-pagination", {
+                staticClass: "my-0",
+                attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
+                model: {
+                  value: _vm.currentPage,
+                  callback: function($$v) {
+                    _vm.currentPage = $$v
+                  },
+                  expression: "currentPage"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "b-modal",
         {
           attrs: { id: "modalInfo", title: _vm.modalInfo.title, "ok-only": "" },
@@ -37430,6 +37505,284 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(256)
+/* template */
+var __vue_template__ = __webpack_require__(257)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/ProcessVueTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-164fd3a5", Component.options)
+  } else {
+    hotAPI.reload("data-v-164fd3a5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 256 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var items = [];
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      items: items,
+      fields: [{ key: 'name', label: 'Process', sortable: true }, { key: 'description', label: 'Description', sortable: true, 'class': 'text-center' }],
+      currentPage: 1,
+      perPage: 10,
+      totalRows: items.length,
+      filter: null,
+      modalInfo: { title: '', content: '' }
+    };
+  },
+  mounted: function mounted() {
+    this.toShowProcessList();
+  },
+
+  methods: {
+    toShowProcessList: function toShowProcessList() {
+      var _this = this;
+
+      axios.get('/process').then(function (response) {
+        _this.items = response.data;
+        $(".loader").css("display", "none");
+      }).catch(function (error) {
+        $(".loader").css("display", "none");
+        console.log(error);
+      });
+      /* return this.items = [
+      { id: 2, parentId: 40, account: 123123, name: 'orderSwap', service: 54546, status: 'complete', processType: 'Broadband', placeBy: 'ex_venchin', preferredDate: '05.12.2018'}
+      ]; */
+    },
+    info: function info(item, index, button) {
+      this.modalInfo.title = 'Row index: ' + index;
+      this.modalInfo.content = JSON.stringify(item, null, 2);
+      this.$root.$emit('bv::show::modal', 'modalInfo', button);
+    },
+    resetModal: function resetModal() {
+      this.modalInfo.title = '';
+      this.modalInfo.content = '';
+    },
+    onFiltered: function onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
+      $("#order-flow").html('');
+    },
+    expandAdditionalInfo: function expandAdditionalInfo(row) {
+      $(".loader").css("display", "block");
+      axios.post('/order/flow', { orderId: row.id }).then(function (response) {
+        $("#order-flow").html(response.data);
+        $(".loader").css("display", "none");
+      }).catch(function (error) {
+        $(".loader").css("display", "none");
+        $("#order-flow").html('No records to show');
+        console.log(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-container",
+    { attrs: { fluid: "" } },
+    [
+      _c("b-table", {
+        staticClass: "table table-striped",
+        attrs: {
+          "show-empty": "",
+          stacked: "md",
+          items: _vm.items,
+          fields: _vm.fields,
+          "current-page": _vm.currentPage,
+          "per-page": _vm.perPage,
+          filter: _vm.filter
+        },
+        on: {
+          filtered: _vm.onFiltered,
+          "row-clicked": _vm.expandAdditionalInfo
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "external_id",
+            fn: function(row) {
+              return [_vm._v(_vm._s(row.value ? "-" : "-"))]
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            { staticClass: "my-1", attrs: { md: "6" } },
+            [
+              _c("b-pagination", {
+                staticClass: "my-0",
+                attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
+                model: {
+                  value: _vm.currentPage,
+                  callback: function($$v) {
+                    _vm.currentPage = $$v
+                  },
+                  expression: "currentPage"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: { id: "modalInfo", title: _vm.modalInfo.title, "ok-only": "" },
+          on: { hide: _vm.resetModal }
+        },
+        [_c("pre", [_vm._v(_vm._s(_vm.modalInfo.content))])]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-164fd3a5", module.exports)
+  }
+}
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(259);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(62)("3a29909c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58329706\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Process.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-58329706\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Process.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#circle {\n    width: 50px;\n    height: 50px;\n    border-radius: 25px;\n    border: 2px solid #000;\n    float:left;\n    position: relative;\n    top:35px;\n}\n#circle-line {\n    border: 1px solid#000;\n    float:left;\n    width:20px;\n    position: relative;\n    top:40px;\n}\n#action-step {\n    border: 1px solid#000;\n    float:left;\n    /* display:inline-block; */\n    padding: 30px;\n    text-align: center;\n    width:auto;\n    margin: 10px 0;\n}\n#show-flow {\n    margin: 0 auto;\n    display:table;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
