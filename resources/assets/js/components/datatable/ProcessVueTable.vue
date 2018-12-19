@@ -1,7 +1,16 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
-
+    <b-row>
+      <div class="input-group col-md-3">
+          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px;">
+           <span class="input-group-btn">
+               <button class="btn btn-info btn-lg" :disabled="!filter">
+                   <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+       </div>
+    </b-row>
     <!-- Main table element -->
     <b-table show-empty
              stacked="md"
@@ -39,7 +48,7 @@ export default {
       items: items,
       fields: [
         { key: 'name', label: 'Process', sortable: true},
-        { key: 'description', label: 'Description', sortable: true, 'class': 'text-center' },
+        { key: 'description', label: 'Description', sortable: true },
        ],
       currentPage: 1,
       perPage: 10,
