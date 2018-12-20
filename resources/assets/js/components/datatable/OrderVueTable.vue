@@ -22,15 +22,15 @@
              :filter="filter"
              @filtered="onFiltered"
              @row-clicked="expandAdditionalInfo"
-             class="table table-striped"
+             class="table table-striped table-hover"
     >
-    <template slot="show_details" slot-scope="row">
-      <!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
+    <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
+    <template slot="created" slot-scope="row">{{ row.value | moment("DD.MM.YYYY") }}</template>
+    <!-- <template slot="show_details" slot-scope="row">
       <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
        {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
       </b-button>
     </template>
-    <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
     <template slot="row-details" slot-scope="row">
       <b-card>
          <div class="col-xs-12 col-md-12" style="margin-top:20px;">
@@ -38,7 +38,7 @@
           </div>
         <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
       </b-card>
-    </template>
+    </template> -->
     </b-table>
 
     <b-row>
@@ -57,6 +57,7 @@
 <style>
 .pagination {
   display:flex !important;
+  padding-bottom:40px;
 }
 </style>
 <script>
@@ -65,6 +66,7 @@ export default {
   data () {
     return {
       items: items,
+      tableIsReady: true,
       fields: [
         { key: 'id', label: 'ID', sortable: true},
         { key: 'external_id', label: 'Parent ID', sortable: true, 'class': 'text-center' },
@@ -90,13 +92,14 @@ export default {
   methods: {
     toShowOrderList: function ()
     {
+        $("#order-flow").css("display", "none");
         axios.get('/order/orderlist').then(response => {
-                this.items = response.data;
-                $(".loader").css("display", "none");
-            }).catch(function(error) {
-                $(".loader").css("display", "none");
-                console.log(error);
-            });
+            this.items = response.data;
+            $(".loader").css("display", "none");
+        }).catch(function(error) {
+            $(".loader").css("display", "none");
+            console.log(error);
+        });
     },
     info (item, index, button) {
       this.modalInfo.title = `Row index: ${index}`
@@ -115,9 +118,13 @@ export default {
     },
     expandAdditionalInfo (row)
     {
+        //row._showDetails = !row._showDetails; 
+        $("#order-header").css("display", "none");
+        $("#order-default").css("display", "none");
         $(".loader").css("display", "block");
           axios.post('/order/flow',{ orderId: row.id}).then(response => {
               $("#order-flow").html(response.data);
+              $("#order-flow").css("display", "block");
               $(".loader").css("display", "none");
           }).catch(function (error) {
               $(".loader").css("display", "none");
@@ -128,6 +135,3 @@ export default {
   }
 }
 </script>
-
-<!-- table-complete-1.vue -->
-

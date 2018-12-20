@@ -17,7 +17,7 @@ class ProcessController extends Controller
 
     public function processNameList(Request $request)
     {
-        $processNameLists = Process::where('name', 'like', $request->get('processName').'%')->take(20)->get(['name']);
+        $processNameLists = Process::where('name', 'like', $request->get('processName').'%')->get(['name']);
         $processName  = '';
 
         foreach ($processNameLists as $processNameList) {

@@ -1,3 +1,4 @@
+<h3>Order Flow for {{ $offerDetails[0]->id }}<a id="goBack" style="float:right; cursor:pointer; font-size:16px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a></h3>
 <div class="col-md-7" style="padding-left:0px;">
     <table class="table table-striped table-hover">
         <thead class="thead-blue">
@@ -17,7 +18,8 @@
                     <tr>
                         <td>{{ $orderActionDetail->step }}</td>
                         <td>{{ $orderActionDetail->action->name }}</td>
-                        <td class="status-completed step-status-cell" data-step-message="Callback received">{{ $orderActionDetail->actionStatus->name }}</td>
+                        <td class="status-completed step-status-cell" data-step-message="Callback received" data-toggle="tooltip" title="{{ $orderActionDetail->actionStatus->description }}">
+                           {{ $orderActionDetail->actionStatus->name }}</td>
                         <td>
                             @if( $orderActionDetail->actionStatus->name != 'completed' && $orderActionDetail->actionStatus->name != 'skipped')
                                 <button type="button" class="skip-order-step-btn small-button">Skip</button>
@@ -39,7 +41,7 @@
                         $i++; 
                     }
                     $orderStatus .='<hr id="circle-line"></hr>
-                    <div id="action-step" style="border:3px solid '.$box_color.'; color:'.$text_color.';">
+                    <div id="action-step" style="border:3px solid '.$box_color.'; color:'.$text_color.';" data-toggle="tooltip" title="'. $orderActionDetail->actionStatus->description.'">
                         <div style="background:'.$box_color.'; color:#fff; padding:5px 0;">'.$orderActionDetail->actionStatus->name.'</div>
                         <div id="action-step-div">
                             <span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">
@@ -183,3 +185,10 @@
 <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+$('#goBack').click(function(){
+    $("#order-flow").css("display", "none");
+    $("#order-header").css("display", "block");
+    $("#order-default").css("display", "block");
+});
+</script>

@@ -19,7 +19,8 @@
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
-              class="table table-striped"
+             @filtered="onFiltered"
+              class="table table-striped table-hover"
     >
     <template slot="actions" slot-scope="row">
       <b-button size="sm" @click.stop="row.toggleDetails">
@@ -29,13 +30,13 @@
     <template slot="row-details" slot-scope="row">
         <b-card>
             <div align='center'>
-                <div id="circle"></div>
+                <div id="pcircle"></div>
                 <div v-for="(value, key) in row.item.get_actions" :key="key">
-                    <hr id="circle-line"></hr>
-                    <div id="action-step"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP {{key+1}}</span><br> {{ value.name }}</div>
+                    <hr id="pcircle-line"></hr>
+                    <div id="paction-step"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP {{key+1}}</span><br> {{ value.name }}</div>
                 </div>
-                <hr id="circle-line"></hr>
-                <div id="circle"></div>
+                <hr id="pcircle-line"></hr>
+                <div id="pcircle"></div>
                 <div style="clear:both;"></div>
             </div>
         </b-card>
@@ -68,7 +69,7 @@ export default {
         { key: 'actions', label: 'Actions' }
        ],
       currentPage: 1,
-      perPage: 10,
+      perPage: 15,
       totalRows: items.length,
       filter: null,
       modalInfo: { title: '', content: '' }
@@ -81,12 +82,17 @@ export default {
     toShowProcessList: function ()
     {
         axios.get('/process').then(response => {
-                this.items = response.data;
-                $(".loader").css("display", "none");
-            }).catch(function(error) {
-                $(".loader").css("display", "none");
-                console.log(error);
-            });
+            this.items = response.data;
+            $(".loader").css("display", "none");
+        }).catch(function(error) {
+            $(".loader").css("display", "none");
+            console.log(error);
+        });
+    },
+    onFiltered (filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     },
     resetModal () {
       this.modalInfo.title = ''
@@ -95,3 +101,40 @@ export default {
   }
 }
 </script>
+<style>
+    #pcircle {
+        width: 50px;
+        height: 50px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+        border: 2px solid #000;
+        float:left;
+        position: relative;
+        top:35px;
+    }
+    #pcircle-line {
+        border: 1px solid#000;
+        float:left;
+        width:20px;
+        position: relative;
+        top:40px;
+    }
+    #paction-step {
+        border: 1px solid#000;
+        float:left;
+        /* display:inline-block; */
+        padding: 30px 5px;
+        text-align: center;
+        width:auto;
+        margin: 10px 0;
+    }
+    #show-flow {
+        margin: 0 auto;
+        display:table;
+    }
+    .pagination {
+    display:flex !important;
+    padding-bottom:40px;
+  }
+</style>

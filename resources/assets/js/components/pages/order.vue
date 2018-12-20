@@ -1,7 +1,7 @@
 <template>
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" id="order-header">
       <h1>
         Order
       </h1>
@@ -17,13 +17,13 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-12" id="order-default">
                 <order-datatable></order-datatable>
             </div>
             <!-- /.col -->
-           <!--  <div class="col-xs-12 col-md-12" style="margin-top:20px;">
+            <div class="col-xs-12 col-md-12" style="margin-top:20px;">
                 <div id="order-flow" style="margin-bottom: 100px;"></div>
-            </div> -->
+            </div>
         </div>
         <div class="loader" style="display:none; z-index:1000; position:absolute; top:30%; left:50%"></div>
     </section>

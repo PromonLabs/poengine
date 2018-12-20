@@ -30,36 +30,3 @@
 <script>
     export default {}
 </script>
-<style>
-    #circle {
-        width: 50px;
-        height: 50px;
-        -webkit-border-radius: 25px;
-        -moz-border-radius: 25px;
-        border-radius: 25px;
-        border: 2px solid #000;
-        float:left;
-        position: relative;
-        top:35px;
-    }
-    #circle-line {
-        border: 1px solid#000;
-        float:left;
-        width:20px;
-        position: relative;
-        top:40px;
-    }
-    #action-step {
-        border: 1px solid#000;
-        float:left;
-        /* display:inline-block; */
-        padding: 30px;
-        text-align: center;
-        width:auto;
-        margin: 10px 0;
-    }
-    #show-flow {
-        margin: 0 auto;
-        display:table;
-    }
-</style>
