@@ -37457,6 +37457,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(256)
+}
 var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(244)
@@ -37465,7 +37469,7 @@ var __vue_template__ = __webpack_require__(245)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -37547,13 +37551,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var items = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: items,
-      fields: [{ key: 'name', label: 'Process', sortable: true }, { key: 'description', label: 'Description', sortable: true }],
+      fields: [{ key: 'name', label: 'Process', sortable: true }, { key: 'description', label: 'Description', sortable: true }, { key: 'actions', label: 'Actions' }],
       currentPage: 1,
       perPage: 10,
       totalRows: items.length,
@@ -37581,8 +37603,8 @@ var items = [];
       ]; */
     },
     info: function info(item, index, button) {
-      this.modalInfo.title = 'Row index: ' + index;
-      this.modalInfo.content = JSON.stringify(item, null, 2);
+      this.modalInfo.title = 'Test';
+      this.modalInfo.content = 'Test Two';
       this.$root.$emit('bv::show::modal', 'modalInfo', button);
     },
     resetModal: function resetModal() {
@@ -37633,10 +37655,10 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            staticStyle: { height: "40px" },
+            staticStyle: { height: "46px" },
             attrs: {
               type: "search",
-              placeholder: "Search for order",
+              placeholder: "Search for process",
               value: "",
               autocomplete: "off",
               autofocus: "autofocus",
@@ -37685,9 +37707,74 @@ var render = function() {
         },
         scopedSlots: _vm._u([
           {
-            key: "external_id",
+            key: "actions",
             fn: function(row) {
-              return [_vm._v(_vm._s(row.value ? "-" : "-"))]
+              return [
+                _c(
+                  "b-button",
+                  {
+                    attrs: { size: "sm" },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        return row.toggleDetails($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(row.detailsShowing ? "Hide" : "Show") +
+                        " Details\n      "
+                    )
+                  ]
+                )
+              ]
+            }
+          },
+          {
+            key: "row-details",
+            fn: function(row) {
+              return [
+                _c("b-card", [
+                  _c(
+                    "div",
+                    { attrs: { align: "center" } },
+                    [
+                      _c("div", { attrs: { id: "circle" } }),
+                      _vm._v(" "),
+                      _vm._l(row.item.get_actions, function(value, key) {
+                        return _c("div", { key: key }, [
+                          _c("hr", { attrs: { id: "circle-line" } }),
+                          _vm._v(" "),
+                          _c("div", { attrs: { id: "action-step" } }, [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  padding: "5px 10px",
+                                  margin: "5px 0px",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v("STEP " + _vm._s(key + 1))]
+                            ),
+                            _c("br"),
+                            _vm._v(" " + _vm._s(value.name))
+                          ])
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("hr", { attrs: { id: "circle-line" } }),
+                      _vm._v(" "),
+                      _c("div", { attrs: { id: "circle" } }),
+                      _vm._v(" "),
+                      _c("div", { staticStyle: { clear: "both" } })
+                    ],
+                    2
+                  )
+                ])
+              ]
             }
           }
         ])
@@ -37829,6 +37916,52 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(257);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(32)("4df2f69e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-164fd3a5\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProcessVueTable.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-164fd3a5\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProcessVueTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal.show { display:block;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
