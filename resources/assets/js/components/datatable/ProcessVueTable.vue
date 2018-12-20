@@ -3,7 +3,7 @@
     <!-- User Interface controls -->
     <b-row>
       <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 46px;">
+          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px;">
            <span class="input-group-btn">
                <button class="btn btn-info btn-lg" :disabled="!filter">
                    <i class="glyphicon glyphicon-search"></i>
@@ -19,9 +19,7 @@
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
-             @filtered="onFiltered"
-             @row-clicked="expandAdditionalInfo"
-             class="table table-striped"
+              class="table table-striped"
     >
     <template slot="actions" slot-scope="row">
       <b-button size="sm" @click.stop="row.toggleDetails">
@@ -89,43 +87,11 @@ export default {
                 $(".loader").css("display", "none");
                 console.log(error);
             });
-      /* return this.items = [
-   { id: 2, parentId: 40, account: 123123, name: 'orderSwap', service: 54546, status: 'complete', processType: 'Broadband', placeBy: 'ex_venchin', preferredDate: '05.12.2018'}
-]; */
-    },
-    info (item, index, button) {
-      this.modalInfo.title = 'Test'
-      this.modalInfo.content = 'Test Two'
-      this.$root.$emit('bv::show::modal', 'modalInfo', button)
     },
     resetModal () {
       this.modalInfo.title = ''
       this.modalInfo.content = ''
-    },
-    onFiltered (filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length
-      this.currentPage = 1
-      $("#order-flow").html('');
-    },
-    expandAdditionalInfo (row)
-    {
-        $(".loader").css("display", "block");
-            axios.post('/order/flow',{ orderId: row.id}).then(response => {
-                $("#order-flow").html(response.data);
-                $(".loader").css("display", "none");
-            }).catch(function (error) {
-                $(".loader").css("display", "none");
-                $("#order-flow").html('No records to show');
-                console.log(error);
-            });
     }
   }
 }
 </script>
-
-<!-- table-complete-1.vue -->
-
-<style>
-.modal.show { display:block; }
-</style>
