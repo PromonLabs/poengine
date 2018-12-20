@@ -19,6 +19,7 @@
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
+             @filtered="onFiltered"
               class="table table-striped"
     >
     <template slot="actions" slot-scope="row">
@@ -87,6 +88,11 @@ export default {
                 $(".loader").css("display", "none");
                 console.log(error);
             });
+    },
+    onFiltered (filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     },
     resetModal () {
       this.modalInfo.title = ''

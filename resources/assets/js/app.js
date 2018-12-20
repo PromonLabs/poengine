@@ -9,6 +9,8 @@ Vue.use(axios)
 
 Vue.use(VueRouter)
 
+Vue.use(require('vue-moment'));
+
 import App from './components/App'
 import Dashboard from './components/pages/Home'
 import Order from './components/pages/Order'

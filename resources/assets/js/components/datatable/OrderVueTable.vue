@@ -24,7 +24,19 @@
              @row-clicked="expandAdditionalInfo"
              class="table table-striped"
     >
+    <template slot="actions" slot-scope="row">
+      <input type="hidden" v-model="_showDetails">
+      <b-button size="sm" @click.stop="row.toggleDetails" v-model="row.detailsShowing">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+    </template>
+    <template slot="row-details" slot-scope="row">
+        <b-card>
+             <div id="order-flow"></div>
+        </b-card>
+      </template>
        <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
+       <template slot="created" slot-scope="row">{{ row.value | moment("DD.MM.YYYY") }}</template>
     </b-table>
 
     <b-row>
@@ -32,12 +44,6 @@
         <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
       </b-col>
     </b-row>
-
-    <!-- Info modal -->
-    <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
-      <pre>{{ modalInfo.content }}</pre>
-    </b-modal>
-
   </b-container>
 </template>
 
@@ -47,6 +53,7 @@ export default {
   data () {
     return {
       items: items,
+      _showDetails:false,
       fields: [
         { key: 'id', label: 'ID', sortable: true},
         { key: 'external_id', label: 'Parent ID', sortable: true, 'class': 'text-center' },
@@ -57,12 +64,12 @@ export default {
         { key: 'process_type', label: 'Process type' },
         { key: 'placed_by', label: 'Place by' },
         { key: 'created', label: 'Preferred date' },
+        { key: 'actions', label: 'Actions' }
       ],
       currentPage: 1,
       perPage: 10,
       totalRows: items.length,
       filter: null,
-      modalInfo: { title: '', content: '' }
     }
   },
   mounted() {
@@ -82,15 +89,6 @@ export default {
    { id: 2, parentId: 40, account: 123123, name: 'orderSwap', service: 54546, status: 'complete', processType: 'Broadband', placeBy: 'ex_venchin', preferredDate: '05.12.2018'}
 ]; */
     },
-    info (item, index, button) {
-      this.modalInfo.title = `Row index: ${index}`
-      this.modalInfo.content = JSON.stringify(item, null, 2)
-      this.$root.$emit('bv::show::modal', 'modalInfo', button)
-    },
-    resetModal () {
-      this.modalInfo.title = ''
-      this.modalInfo.content = ''
-    },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
@@ -99,16 +97,23 @@ export default {
     },
     expandAdditionalInfo (row)
     {
+        this._showDetails = true;
         $(".loader").css("display", "block");
             axios.post('/order/flow',{ orderId: row.id}).then(response => {
                 $("#order-flow").html(response.data);
                 $(".loader").css("display", "none");
+                items._showDetails = !items._showDetails;
             }).catch(function (error) {
                 $(".loader").css("display", "none");
                 $("#order-flow").html('No records to show');
                 console.log(error);
             });
+    },
+    toggleDetails:function ()
+    {
+        alert('test');
     }
+
   }
 }
 </script>
