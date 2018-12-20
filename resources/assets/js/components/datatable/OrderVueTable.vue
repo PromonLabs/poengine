@@ -24,7 +24,21 @@
              @row-clicked="expandAdditionalInfo"
              class="table table-striped"
     >
-       <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
+    <template slot="show_details" slot-scope="row">
+      <!-- we use @click.stop here to prevent emitting of a 'row-clicked' event  -->
+      <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
+       {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
+      </b-button>
+    </template>
+    <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
+    <template slot="row-details" slot-scope="row">
+      <b-card>
+         <div class="col-xs-12 col-md-12" style="margin-top:20px;">
+              <div id="order-flow" style="margin-bottom: 100px;"></div>
+          </div>
+        <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
+      </b-card>
+    </template>
     </b-table>
 
     <b-row>
@@ -40,7 +54,11 @@
 
   </b-container>
 </template>
-
+<style>
+.pagination {
+  display:flex !important;
+}
+</style>
 <script>
 const items = [];
 export default {
@@ -57,9 +75,10 @@ export default {
         { key: 'process_type', label: 'Process type' },
         { key: 'placed_by', label: 'Place by' },
         { key: 'created', label: 'Preferred date' },
+        { key: 'show_details', label: '' },
       ],
       currentPage: 1,
-      perPage: 10,
+      perPage: 20,
       totalRows: items.length,
       filter: null,
       modalInfo: { title: '', content: '' }
@@ -78,9 +97,6 @@ export default {
                 $(".loader").css("display", "none");
                 console.log(error);
             });
-      /* return this.items = [
-   { id: 2, parentId: 40, account: 123123, name: 'orderSwap', service: 54546, status: 'complete', processType: 'Broadband', placeBy: 'ex_venchin', preferredDate: '05.12.2018'}
-]; */
     },
     info (item, index, button) {
       this.modalInfo.title = `Row index: ${index}`
@@ -100,14 +116,14 @@ export default {
     expandAdditionalInfo (row)
     {
         $(".loader").css("display", "block");
-            axios.post('/order/flow',{ orderId: row.id}).then(response => {
-                $("#order-flow").html(response.data);
-                $(".loader").css("display", "none");
-            }).catch(function (error) {
-                $(".loader").css("display", "none");
-                $("#order-flow").html('No records to show');
-                console.log(error);
-            });
+          axios.post('/order/flow',{ orderId: row.id}).then(response => {
+              $("#order-flow").html(response.data);
+              $(".loader").css("display", "none");
+          }).catch(function (error) {
+              $(".loader").css("display", "none");
+              $("#order-flow").html('No records to show');
+              console.log(error);
+          });
     }
   }
 }

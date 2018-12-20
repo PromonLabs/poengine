@@ -1,7 +1,16 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
-
+    <b-row>
+      <div class="input-group col-md-3">
+          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 46px;">
+           <span class="input-group-btn">
+               <button class="btn btn-info btn-lg" :disabled="!filter">
+                   <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+       </div>
+    </b-row>
     <!-- Main table element -->
     <b-table show-empty
              stacked="md"
@@ -14,7 +23,25 @@
              @row-clicked="expandAdditionalInfo"
              class="table table-striped"
     >
-       <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
+    <template slot="actions" slot-scope="row">
+      <b-button size="sm" @click.stop="row.toggleDetails">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+    </template>
+    <template slot="row-details" slot-scope="row">
+        <b-card>
+            <div align='center'>
+                <div id="circle"></div>
+                <div v-for="(value, key) in row.item.get_actions" :key="key">
+                    <hr id="circle-line"></hr>
+                    <div id="action-step"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP {{key+1}}</span><br> {{ value.name }}</div>
+                </div>
+                <hr id="circle-line"></hr>
+                <div id="circle"></div>
+                <div style="clear:both;"></div>
+            </div>
+        </b-card>
+      </template>
     </b-table>
 
     <b-row>
@@ -39,7 +66,8 @@ export default {
       items: items,
       fields: [
         { key: 'name', label: 'Process', sortable: true},
-        { key: 'description', label: 'Description', sortable: true, 'class': 'text-center' },
+        { key: 'description', label: 'Description', sortable: true },
+        { key: 'actions', label: 'Actions' }
        ],
       currentPage: 1,
       perPage: 10,
@@ -66,8 +94,8 @@ export default {
 ]; */
     },
     info (item, index, button) {
-      this.modalInfo.title = `Row index: ${index}`
-      this.modalInfo.content = JSON.stringify(item, null, 2)
+      this.modalInfo.title = 'Test'
+      this.modalInfo.content = 'Test Two'
       this.$root.$emit('bv::show::modal', 'modalInfo', button)
     },
     resetModal () {
@@ -98,3 +126,6 @@ export default {
 
 <!-- table-complete-1.vue -->
 
+<style>
+.modal.show { display:block; }
+</style>
