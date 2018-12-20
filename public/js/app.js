@@ -37567,8 +37567,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 var items = [];
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37598,35 +37596,10 @@ var items = [];
         $(".loader").css("display", "none");
         console.log(error);
       });
-      /* return this.items = [
-      { id: 2, parentId: 40, account: 123123, name: 'orderSwap', service: 54546, status: 'complete', processType: 'Broadband', placeBy: 'ex_venchin', preferredDate: '05.12.2018'}
-      ]; */
-    },
-    info: function info(item, index, button) {
-      this.modalInfo.title = 'Test';
-      this.modalInfo.content = 'Test Two';
-      this.$root.$emit('bv::show::modal', 'modalInfo', button);
     },
     resetModal: function resetModal() {
       this.modalInfo.title = '';
       this.modalInfo.content = '';
-    },
-    onFiltered: function onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
-      $("#order-flow").html('');
-    },
-    expandAdditionalInfo: function expandAdditionalInfo(row) {
-      $(".loader").css("display", "block");
-      axios.post('/order/flow', { orderId: row.id }).then(function (response) {
-        $("#order-flow").html(response.data);
-        $(".loader").css("display", "none");
-      }).catch(function (error) {
-        $(".loader").css("display", "none");
-        $("#order-flow").html('No records to show');
-        console.log(error);
-      });
     }
   }
 });
@@ -37655,7 +37628,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            staticStyle: { height: "46px" },
+            staticStyle: { height: "40px" },
             attrs: {
               type: "search",
               placeholder: "Search for process",
@@ -37700,10 +37673,6 @@ var render = function() {
           "current-page": _vm.currentPage,
           "per-page": _vm.perPage,
           filter: _vm.filter
-        },
-        on: {
-          filtered: _vm.onFiltered,
-          "row-clicked": _vm.expandAdditionalInfo
         },
         scopedSlots: _vm._u([
           {
