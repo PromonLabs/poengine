@@ -11,14 +11,25 @@
 |
 */
 
-/* Route::get('/', function () {
-    return view('pages/home');
-}); */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/process', 'ProcessController@index')->name('process');
-Route::post('/order/list', 'OrderController@list')->name('order.list');
-Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
-Route::get('/order', function () {
-    return view('pages/order');
-})->name('order');
+
+Route::get('/', 'LoginController@checklogin')->name('login');
+Route::post('/login', 'LoginController@index')->name('login');
+
+Route::middleware('loginSuccess')->group(function () {
+    Route::get('/api/{any}', 'SinglePageController@index')->where('any', '.*');
+    // route to process the form
+    Route::post('/home', 'HomeController@index')->name('login');
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('logout', 'HomeController@logout')->name('logout');
+    Route::post('/order/id/list', 'OrderController@orderIdList')->name('order.id.list');
+    Route::get('/order/orderlist', 'OrderController@orderList')->name('order.orderlist');
+    Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
+    Route::get('/process', 'ProcessController@index')->name('process');
+    Route::post('/process/name/list', 'ProcessController@processNameList')->name('process.name.list');
+    Route::post('/process/list', 'ProcessController@list')->name('process.list');
+});
+
+Route::get('/test', function () {
+    return view('welcome');
+})->name('test');

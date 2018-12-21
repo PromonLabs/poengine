@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading panel-heading-divider">
                     <span class="panel-subtitle">Orders completed for last {{ $ordersCompletedGroupByMonth->count() }} month</span>
@@ -137,7 +137,11 @@
   <!-- /.content-wrapper -->
 @endsection
 <link rel="stylesheet" type="text/css" href="/assets/lib/morrisjs/morris.css"/>
-
+<style>
+   .main-header, .main-footer, .go-up {
+       display:none;
+   } 
+</style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 <script src="/assets/lib/jquery.sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="/assets/lib/countup/countUp.min.js" type="text/javascript"></script>

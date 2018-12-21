@@ -28,8 +28,8 @@ class ProcessInstance extends Model
         return $this->belongsTo(Offer::class, 'offer_id', 'id');
     }
 
-    public function addOns()
+    public function getAddonIdsAttribute($value)
     {
-        return $this->belongsTo(Offer::class, 'addon_ids', 'id');
+        return explode(',', $value);
     }
 }

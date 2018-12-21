@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 	<head>
@@ -8,7 +9,7 @@
 
 		<meta name="keywords" content="PO Engine">
 		<meta name="description" content="PO Engine">
-
+        <meta name="csrf-token" content="{{csrf_token()}}">
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
@@ -28,19 +29,26 @@
 		<link rel="stylesheet" href="{{ asset('assets/dist/css/AdminLTE.min.css') }}">
 		<!-- AdminLTE Skins. Choose a skin from the css/skins
 			folder instead of downloading all of them to reduce the load. -->
-		<link rel="stylesheet" href="{{ asset('assets/dist/css/skins/_all-skins.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/dist/css/skins/_all-skins.min.css') }}">
+        @yield('style')
 	</head>
-	<body class="sidebar-mini fixed sidebar-mini-expand-feature skin-black-light">
-		<div class="wrapper">
-			@include('layouts.header')
-			@include('layouts.sidebar')
+	<body class="sidebar-mini fixed sidebar-mini-expand-feature skin-green-light">
+		<div class="wrapper" id="app">
+
+			<app-header></app-header>
+			{{-- @include('layouts.sidebar') --}}
             @yield('content')
-            @include('layouts.footer')
+            <app-footer></app-footer>
 
             <div class="go-up">
                 <a href="#"><i class="fa fa-chevron-up"></i></a>
             </div><!-- end go-up -->
         </div> <!-- end all -->
+        <style>
+            .content, .info-box-number, .info-box-number {
+                font-weight:normal !important;
+            }
+        </style>
 		<!-- jQuery 3 -->
 		<script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
 		<!-- Bootstrap 3.3.7 -->
@@ -50,6 +58,8 @@
 		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 		<script src="{{ asset('assets/dist/js/pages/dashboard2.js') }}"></script>
 		<!-- AdminLTE for demo purposes -->
-		<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+        <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        @yield('script')
 	</body>
 </html>

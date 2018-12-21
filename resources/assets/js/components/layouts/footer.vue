@@ -1,3 +1,4 @@
+<template>
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
@@ -5,3 +6,12 @@
     <strong>Copyright &copy; 2015-2018 <a href="https://promonsoft.com">Promon Software</a>.</strong> All rights
     reserved.
   </footer>
+</template>
+<style>
+.main-footer {
+  position:fixed;
+  bottom:0px;
+  width:100%;
+}
+</style>
+
