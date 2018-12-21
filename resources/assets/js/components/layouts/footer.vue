@@ -7,3 +7,11 @@
     reserved.
   </footer>
 </template>
+<style>
+.main-footer {
+  position:fixed;
+  bottom:0px;
+  width:100%;
+}
+</style>
+

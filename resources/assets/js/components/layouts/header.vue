@@ -3,9 +3,9 @@
     <!-- Logo -->
     <router-link :to="'/api/home'" class="logo" exact>
         <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>P</b>S</b></span>
+      <span class="logo-mini"><b>W</b>F</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>PO Engine</b></span>
+      <span class="logo-lg"><b>Work Flow Engine</b></span>
     </router-link>
  <!-- Header Navbar: style can be found in header.less -->
  <nav class="navbar navbar-static-top">
@@ -35,7 +35,15 @@
     justify-content: flex-end !important;
 }
 .navbar-brand {
-    font-size:16px !important;
+    font-size:14px !important;
+}
+
+.router-link-active{
+  background:#93CF46;
+}
+
+.logo {
+    color:#fff !important;
 }
 </style>
 <script>

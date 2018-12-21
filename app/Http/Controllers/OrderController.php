@@ -12,14 +12,8 @@ class OrderController extends Controller
 {
     public function orderList(Request $request)
     {
-        $orderDetails = ProcessInstance::with('processStatus')->with('process')->orderBy('id', 'desc')->take(10)->get();
-        return view('pages.order-list', compact('orderDetails'));
-    }
-
-    public function list(Request $request)
-    {
-        $orderDetails = ProcessInstance::with('processStatus')->with('process')->where('id', 'ilike', $request->get('orderId').'%')->get();
-        return view('pages.order-list', compact('orderDetails'));
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')->orderBy('id', 'desc')->take(100)->get();
+        return $orderDetails;
     }
 
     public function flow(Request $request)

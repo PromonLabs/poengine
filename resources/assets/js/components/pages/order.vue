@@ -1,13 +1,13 @@
 <template>
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" id="order-header">
       <h1>
         Order
       </h1>
       <ol class="breadcrumb">
         <li>
-            <router-link :to="'/api/home'" class="logo" exact>
+            <router-link :to="'/api/home'"  exact>
                 <i class="fa fa-dashboard"></i> Home
             </router-link>
         <li class="active">Order</li>
@@ -17,29 +17,12 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <div id="custom-search-input">
-                    <div class="input-group col-md-3">
-                        <input type="search" class="form-control" list="order-ids"  v-model="search" v-on:keyup="searchKeyUp"  placeholder="Search for order status"
-                        value=""
-                        autocomplete="off"
-                        autofocus
-                        spellcheck="false"
-                        tabindex="0"
-                        height="auto"
-                        style = "height:40px;" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="submit" v-on:click="searchOnClick">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                        <order-list></order-list>
-                    </div>
-                </div>
+            <div class="col-xs-12 col-md-12" id="order-default">
+                <order-datatable></order-datatable>
             </div>
             <!-- /.col -->
             <div class="col-xs-12 col-md-12" style="margin-top:20px;">
-                <div id="order-list"></div>
+                <div id="order-flow" style="margin-bottom: 100px;"></div>
             </div>
         </div>
         <div class="loader" style="display:none; z-index:1000; position:absolute; top:30%; left:50%"></div>
@@ -81,6 +64,9 @@
     }
     .table {
         font-weight:normal !important;
+    }
+    .table tr {
+        cursor: pointer;
     }
 </style>
 <script>
