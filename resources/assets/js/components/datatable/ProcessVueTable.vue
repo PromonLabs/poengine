@@ -3,12 +3,12 @@
     <!-- User Interface controls -->
     <b-row>
       <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px;">
-           <span class="input-group-btn">
+          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
+          <!--  <span class="input-group-btn">
                <button class="btn btn-info btn-lg" :disabled="!filter">
                    <i class="glyphicon glyphicon-search"></i>
                 </button>
-            </span>
+            </span> -->
        </div>
     </b-row>
     <!-- Main table element -->

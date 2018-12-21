@@ -3,12 +3,12 @@
     <!-- User Interface controls -->
     <b-row>
       <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px;">
-           <span class="input-group-btn">
+          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
+          <!--  <span class="input-group-btn">
                <button class="btn btn-info btn-lg" :disabled="!filter">
                    <i class="glyphicon glyphicon-search"></i>
                 </button>
-            </span>
+            </span> -->
        </div>
     </b-row>
 <br>
@@ -26,19 +26,6 @@
     >
     <template slot="external_id" slot-scope="row">{{row.value?'-':'-'}}</template>
     <template slot="created" slot-scope="row">{{ row.value | moment("DD.MM.YYYY") }}</template>
-    <!-- <template slot="show_details" slot-scope="row">
-      <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
-       {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
-      </b-button>
-    </template>
-    <template slot="row-details" slot-scope="row">
-      <b-card>
-         <div class="col-xs-12 col-md-12" style="margin-top:20px;">
-              <div id="order-flow" style="margin-bottom: 100px;"></div>
-          </div>
-        <b-button size="sm" @click="row.toggleDetails">Hide Details</b-button>
-      </b-card>
-    </template> -->
     </b-table>
 
     <b-row>

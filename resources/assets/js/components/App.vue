@@ -5,7 +5,7 @@
 		<!-- Basic Page Needs -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>PO Engine - Dashboard</title>
+		<title>Work Flow Engine - Dashboard</title>
 
 		<meta name="keywords" content="PO Engine">
 		<meta name="description" content="PO Engine">

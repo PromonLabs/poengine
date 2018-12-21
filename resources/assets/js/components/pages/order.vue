@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li>
-            <router-link :to="'/api/home'" class="logo" exact>
+            <router-link :to="'/api/home'"  exact>
                 <i class="fa fa-dashboard"></i> Home
             </router-link>
         <li class="active">Order</li>
