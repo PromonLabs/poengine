@@ -6,7 +6,9 @@
         Process
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><router-link :to="'/api/home'"  exact>
+                <i class="fa fa-dashboard"></i> Home
+            </router-link></li>
         <li class="active">Process</li>
       </ol>
     </section>

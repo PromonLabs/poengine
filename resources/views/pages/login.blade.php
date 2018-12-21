@@ -4,7 +4,7 @@
 		<!-- Basic Page Needs -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>PO Engine - Dashboard</title>
+		<title>Work Flow Engine - Dashboard</title>
 
 		<meta name="keywords" content="PO Engine">
 		<meta name="description" content="PO Engine">
@@ -168,7 +168,7 @@
                             <div class="card card-border-color card-border-color-primary">
                                 <div class="card-header">
                                     <div style="display: inline-flex; align-items: center;">
-                                        <h3 style="margin-left: 10px;">PO Engine</h3>
+                                        <h3 style="margin-left: 10px;">Work Flow Engine</h3>
                                     </div>
                                     <span class="splash-description">Please enter your user information.</span>
                                 </div>
