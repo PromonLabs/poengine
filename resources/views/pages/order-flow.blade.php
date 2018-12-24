@@ -1,4 +1,4 @@
-<h3>Order Flow for {{ $offerDetails[0]->id }}<a id="goBack" style="float:right; cursor:pointer; font-size:16px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a></h3>
+<h3>Order Flow for {{ $offerDetails[0]->id }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
 <div class="col-md-7" style="padding-left:0px;">
     <table class="table table-striped table-hover">
         <thead class="thead-blue">
@@ -33,19 +33,19 @@
                         $box_color = 'green';
                     } else {
                         if ($i == 1) {
-                            $box_color = 'steelblue'; 
+                            $box_color = 'steelblue';
                         } else {
                             $box_color = 'red';
                         }
                         $disableButton = 1;
-                        $i++; 
+                        $i++;
                     }
                     $orderStatus .='<hr id="circle-line"></hr>
                     <div id="action-step" style="border:3px solid '.$box_color.'; color:'.$text_color.';" data-toggle="tooltip" title="'. $orderActionDetail->actionStatus->description.'">
                         <div style="background:'.$box_color.'; color:#fff; padding:5px 0;">'.$orderActionDetail->actionStatus->name.'</div>
                         <div id="action-step-div">
                             <span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">
-                                STEP '.$j. 
+                                STEP '.$j.
                             '</span><br> '. $orderActionDetail->action->name.'
                         </div>
                     </div>';
@@ -121,7 +121,7 @@
                 </tbody>
             </table>
         @endif
-    
+
         @if($addons && isset($addons[0]->id))
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
@@ -167,7 +167,7 @@
     #action-step {
         border: 1px solid#000;
         float:left;
-        /* display:inline-block; 
+        /* display:inline-block;
         padding: 5px 0;*/
         text-align: center;
         width:auto;
