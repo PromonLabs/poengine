@@ -50,6 +50,9 @@ export default {
       fields: [
         { key: 'name', label: 'Process', sortable: true},
         { key: 'description', label: 'Description', sortable: true },
+        { key: 'priority', label: 'Priority', sortable: true },
+        { key: 'xsd_filename', label: 'XSD Filename', sortable: true },
+        { key: 'callback_num_required', label: 'Callback Required', sortable: true },
         { key: 'actions', label: 'Actions' }
        ],
       currentPage: 1,
