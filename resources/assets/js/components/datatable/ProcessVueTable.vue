@@ -13,34 +13,19 @@
     </b-row>
     <!-- Main table element -->
     <b-table show-empty
-             stacked="md"
-             :items="items"
-             :fields="fields"
-             :current-page="currentPage"
-             :per-page="perPage"
-             :filter="filter"
-             @filtered="onFiltered"
-              class="table table-striped table-hover"
+            stacked="md"
+            :items="items"
+            :fields="fields"
+            :current-page="currentPage"
+            :per-page="perPage"
+            :filter="filter"
+            @filtered="onFiltered"
+            @row-clicked="expandAdditionalInfo"
+            class="table table-striped table-hover"
     >
-    <template slot="actions" slot-scope="row">
-      <b-button size="sm" @click.stop="row.toggleDetails">
-          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-        </b-button>
+    <template slot="actions" slot-scope="row" >
+        <b-link :to="{ path: 'process/edit/'+ row.item.name }"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></b-link>
     </template>
-    <template slot="row-details" slot-scope="row">
-        <b-card>
-            <div align='center'>
-                <div id="pcircle"></div>
-                <div v-for="(value, key) in row.item.get_actions" :key="key">
-                    <hr id="pcircle-line"></hr>
-                    <div id="paction-step"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;">STEP {{key+1}}</span><br> {{ value.name }}</div>
-                </div>
-                <hr id="pcircle-line"></hr>
-                <div id="pcircle"></div>
-                <div style="clear:both;"></div>
-            </div>
-        </b-card>
-      </template>
     </b-table>
 
     <b-row>
@@ -53,7 +38,6 @@
     <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
       <pre>{{ modalInfo.content }}</pre>
     </b-modal>
-
   </b-container>
 </template>
 
@@ -72,6 +56,7 @@ export default {
       perPage: 15,
       totalRows: items.length,
       filter: null,
+      props:'',
       modalInfo: { title: '', content: '' }
     }
   },
@@ -97,42 +82,30 @@ export default {
     resetModal () {
       this.modalInfo.title = ''
       this.modalInfo.content = ''
+    },
+    expandAdditionalInfo (row)
+    {
+        //this.$router.push('/api/process/details/'+row.name);
+       $(".loader").css("display", "block");
+       $("#process-header").css("display", "none");
+        $("#process-default").css("display", "none");
+        axios.post('/process/list', { processName: row.name }).then(response => {
+            console.log(response.data);
+            $("#process-details").html(response.data);
+            $("#process-details").css("display", "block");
+            $(".loader").css("display", "none");
+        }).catch(function(error) {
+            $(".loader").css("display", "none");
+            console.log(error);
+        });
     }
   }
 }
 </script>
 <style>
-    #pcircle {
-        width: 50px;
-        height: 50px;
-        -webkit-border-radius: 25px;
-        -moz-border-radius: 25px;
-        border-radius: 25px;
-        border: 2px solid #000;
-        float:left;
-        position: relative;
-        top:35px;
-    }
-    #pcircle-line {
-        border: 1px solid#000;
-        float:left;
-        width:20px;
-        position: relative;
-        top:40px;
-    }
-    #paction-step {
-        border: 1px solid#000;
-        float:left;
-        /* display:inline-block; */
-        padding: 30px 5px;
-        text-align: center;
-        width:auto;
-        margin: 10px 0;
-    }
-    #show-flow {
-        margin: 0 auto;
-        display:table;
-    }
+.table tr {
+    cursor: pointer;
+}
     .pagination {
     display:flex !important;
     padding-bottom:40px;
