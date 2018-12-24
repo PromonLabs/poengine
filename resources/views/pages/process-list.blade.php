@@ -14,7 +14,7 @@
                 <th>#</th>
                 <th>Action Name</th>
                 <th>Call Back Required</th>
-                <th>Saave Payload</th>
+                <th>Save Payload</th>
                 <th>Stop on Fail</th>
                 <th>Max Retries</th>
                 <th>XSLT File name</th>
