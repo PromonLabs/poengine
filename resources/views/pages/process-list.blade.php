@@ -5,6 +5,9 @@
             <tr>
                 <th>Process Name</th>
                 <th>Description</th>
+                <th>Priority</th>
+                <th>XSD Filename</th>
+                <th>Callback Required</th>
             </tr>
         </thead>
         <tbody>';
@@ -23,7 +26,7 @@
         <tbody>'; ?>
     @foreach ($processDetails as $processDetail)
         <?php $i=1; ?>
-        <? $process .= '<tr><td>'.$processDetail->name.'</td><td>'.$processDetail->description.'</td></tr>'; ?>
+        <? $process .= '<tr><td>'.$processDetail->name.'</td><td>'.$processDetail->description.'</td><td>'.$processDetail->priority.'</td><td>'.$processDetail->xsd_filename.'</td><td>'.($processDetail->callback_num_required? "true":"false").'</td></tr>'; ?>
         <div id="circle"></div>
         @foreach ($processDetail->getActions as $action)
             <hr id="circle-line"></hr>
