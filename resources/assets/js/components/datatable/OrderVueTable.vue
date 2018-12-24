@@ -105,7 +105,7 @@ export default {
     },
     expandAdditionalInfo (row)
     {
-        //row._showDetails = !row._showDetails; 
+        //row._showDetails = !row._showDetails;
         $("#order-header").css("display", "none");
         $("#order-default").css("display", "none");
         $(".loader").css("display", "block");

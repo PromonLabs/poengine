@@ -28,6 +28,8 @@ Route::middleware('loginSuccess')->group(function () {
     Route::get('/process', 'ProcessController@index')->name('process');
     Route::post('/process/name/list', 'ProcessController@processNameList')->name('process.name.list');
     Route::post('/process/list', 'ProcessController@list')->name('process.list');
+    Route::post('/process/edit', 'ProcessController@processEdit')->name('process.edit');
+
 });
 
 Route::get('/test', function () {

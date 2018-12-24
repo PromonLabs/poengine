@@ -26,9 +26,15 @@ class ProcessController extends Controller
         return $processName;
     }
 
+    public function processEdit(Request $request)
+    {
+        $processDetails = Process::with('getActions')->where('name', 'like', $request->get('processName'))->get();
+        return $processDetails;
+    }
+
     public function list(Request $request)
     {
-        $processDetails = Process::with('getActions')->where('name', 'ilike', $request->get('processName').'%')->paginate(20);
+        $processDetails = Process::with('getActions')->where('name', 'like', $request->get('processName'))->get();
         return view('pages.process-list', compact('processDetails'));
     }
 }

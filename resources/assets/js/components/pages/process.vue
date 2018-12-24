@@ -1,7 +1,7 @@
 <template>
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" id="process-header">
       <h1>
         Process
       </h1>
@@ -16,19 +16,21 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-
-            <div class="col-xs-12 col-md-12" style="margin-top:20px;">
+            <div class="col-xs-12 col-md-12" style="margin-top:20px;" id="process-default">
                <process-datatable></process-datatable>
             </div>
             <!-- /.col -->
         </div>
-        <div class="row">
-
+        <div class="col-xs-12 col-md-12" style="margin-top:20px;">
+            <div id="process-details" style="margin-bottom: 100px;"></div>
         </div>
     </section>
     <!-- /.content -->
+    <div style="clear:both;"></div>
   </div>
 </template>
 <script>
-    export default {}
+    export default {
+
+}
 </script>

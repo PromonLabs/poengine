@@ -12,11 +12,11 @@ Vue.use(VueRouter)
 Vue.use(require('vue-moment'));
 
 import App from './components/App'
-import Dashboard from './components/pages/Home'
-import Order from './components/pages/Order'
-import Process from './components/pages/Process'
-//import 'bootstrap/dist/css/bootstrap.css'
-//import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Dashboard from './components/pages/home'
+import Order from './components/pages/order'
+import Process from './components/pages/process'
+import ProcessDetails from './components/pages/process-details'
+import ProcessEdit from './components/pages/process-edit'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
@@ -42,54 +42,19 @@ const router = new VueRouter({
         path: '/api/process',
         name: 'process',
         component: Process
+    }, {
+        path: '/api/process/details/:name',
+        name: 'processdetails',
+        component: ProcessDetails
+    }, {
+        path: '/api/process/edit/:name',
+        name: 'processedit',
+        component: ProcessEdit
     }, ],
 });
 
 const app = new Vue({
     el: '#app',
     components: { App },
-    router,
-    data: {
-        search: null,
-        processName: null,
-    },
-    mounted() {
-        this.toShowProcessList();
-    },
-    methods: {
-        toShowProcessList: function() {
-            axios.get('process/list').then(response => {
-                $("#process-list").html(response.data);
-                $(".loader").css("display", "none");
-            }).catch(function(error) {
-                $(".loader").css("display", "none");
-                console.log(error);
-            });
-        },
-        searchProcess: function() {
-            if (this.processName != '') {
-                axios.post('process/name/list', { processName: this.processName }).then(response => {
-                    $("#process-names").html(response.data);
-                }).catch(function(error) {
-                    console.log(error);
-                });
-            } else {
-                this.toShowProcessList();
-            }
-        },
-        searchProcessOnClick: function() {
-            if (this.processName != '') {
-                $(".loader").css("display", "block");
-                axios.post('process/list', { processName: this.processName }).then(response => {
-                    $("#process-list").html(response.data);
-                    $(".loader").css("display", "none");
-                }).catch(function(error) {
-                    $(".loader").css("display", "none");
-                    console.log(error);
-                });
-            } else {
-                this.toShowProcessList();
-            }
-        }
-    }
+    router
 });
