@@ -12,6 +12,7 @@ class ProcessInstance extends Model
      * @var string
      */
     protected $table = 'process_instance';
+    public $timestamps = false;
 
     public function process()
     {
