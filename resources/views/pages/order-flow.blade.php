@@ -1,5 +1,5 @@
 <h3>Order Flow for {{ $offerDetails[0]->id }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
-<div class="col-md-7" style="padding-left:0px;">
+<div class="col-md-6" style="padding-left:0px;">
     <table class="table table-striped table-hover">
         <thead class="thead-blue">
             <tr>
@@ -60,7 +60,7 @@
         </tbody>
     </table>
 </div>
-<div class="col-md-5" style="padding-right:0px;">
+<div class="col-md-6" style="padding-right:0px;">
         @if($offerDetails)
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
@@ -75,11 +75,13 @@
                         <td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->created)) }}</td>
                         <td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->updated)) }}</td>
                         <td><button type="button" class="skip-order-step-btn small-button" data-toggle="modal" data-target="#showXml" style="cursor:pointer;">Show XML</button>
+                            <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;" id="note_bt">Edit Note</button>
                             @if($disableButton == '1')
                                 <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
                                 <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Reset</button>
                                 <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button>
                             @endif
+                            <br><br><textarea id="txt_note" class="{{$offerDetails[0]->id}}" rows="3" cols="40" disabled="disabled">{{$offerDetails[0]->note}}</textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -190,5 +192,19 @@ $('#goBack').click(function(){
     $("#order-flow").css("display", "none");
     $("#order-header").css("display", "block");
     $("#order-default").css("display", "block");
+});
+$('#note_bt').click(function(){
+    var button = $(this);
+    if (button.text() == 'Save Note') {
+        axios.post('/order/update', { orderId: $("#txt_note").attr("class"), orderNote:$("#txt_note").val() }).then(response => {
+            console.log(response.data);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+    button.text(button.text() == "Edit Note" ? "Save Note" : "Edit Note");
+    (button.text() == "Save Note" ? $("#txt_note").removeAttr("disabled", "disabled") : $("#txt_note").attr("disabled", "disabled"));
+
+
 });
 </script>
