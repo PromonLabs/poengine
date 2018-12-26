@@ -13,6 +13,7 @@ class Process extends Model
      */
     protected $table = 'process';
     protected $dates = ['created'];
+    public $timestamps = false;
 
     public function actions()
     {
