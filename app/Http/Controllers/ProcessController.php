@@ -26,7 +26,7 @@ class ProcessController extends Controller
         return $processName;
     }
 
-    public function processEdit(Request $request)
+    public function edit(Request $request)
     {
         $processDetails = Process::with('getActions')->where('name', 'like', $request->get('processName'))->get();
         return $processDetails;
@@ -36,5 +36,11 @@ class ProcessController extends Controller
     {
         $processDetails = Process::with('getActions')->where('name', 'like', $request->get('processName'))->get();
         return view('pages.process-list', compact('processDetails'));
+    }
+
+    public function update(Request $request)
+    {
+        Process::whereId($request->get('processId'))->update(['name' => $request->get('processName'), 'description' => $request->get('processDescription'), 'priority' => $request->get('processPriority'), 'xsd_filename' => $request->get('processXsd'), 'callback_num_required' => $request->get('processCallback')]);
+        return response()->json('true');
     }
 }
