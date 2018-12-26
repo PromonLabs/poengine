@@ -38,7 +38,6 @@
         </section>
     </div>
 </template>
-<script src="/assets/lib/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script>
     export default {
        data () {
