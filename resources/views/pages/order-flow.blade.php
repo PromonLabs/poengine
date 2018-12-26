@@ -60,28 +60,28 @@
         </tbody>
     </table>
 </div>
-<div class="col-md-6" style="padding-right:0px;">
+<div class="col-md-6" style="padding-right:0px; margin-top:30px;">
         @if($offerDetails)
             <table class="table table-striped table-hover">
-                <thead class="thead-blue">
-                    <tr>
-                        <th>Created</th>
-                        <th>Updated</th>
-                        <th>Option</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr>
-                        <td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->created)) }}</td>
-                        <td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->updated)) }}</td>
-                        <td><button type="button" class="skip-order-step-btn small-button" data-toggle="modal" data-target="#showXml" style="cursor:pointer;">Show XML</button>
+                        <th>Created</th><td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->created)) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated</th><td>{{ date("d.m.y h:i:s", strtotime($offerDetails[0]->updated)) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Options</th><td><button type="button" class="skip-order-step-btn small-button" data-toggle="modal" data-target="#showXml" style="cursor:pointer;">Show XML</button>
                             <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;" id="note_bt">Edit Note</button>
                             @if($disableButton == '1')
                                 <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
                                 <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Reset</button>
                                 <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button>
                             @endif
-                            <br><br><textarea id="txt_note" class="{{$offerDetails[0]->id}}" rows="3" cols="40" disabled="disabled">{{$offerDetails[0]->note}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Note</th><td><textarea id="txt_note" class="{{$offerDetails[0]->id}}" rows="3" cols="40" disabled="disabled">{{$offerDetails[0]->note}}</textarea>
                         </td>
                     </tr>
                 </tbody>
