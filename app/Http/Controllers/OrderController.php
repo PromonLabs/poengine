@@ -39,4 +39,10 @@ class OrderController extends Controller
         }
         return $idList;
     }
+
+    public function update(Request $request)
+    {
+        ProcessInstance::whereId($request->get('orderId'))->update(['note' => $request->get('orderNote')]);
+        return response()->json('true');
+    }
 }
