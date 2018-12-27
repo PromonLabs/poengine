@@ -95,7 +95,7 @@
             }
         },
         toShowOrders: function() {
-            axios.get('/order/orderlist').then(response => {
+            axios.get('/order/order/list').then(response => {
                 $("#order-list").html(response.data);
                 $(".loader").css("display", "none");
             }).catch(function(error) {

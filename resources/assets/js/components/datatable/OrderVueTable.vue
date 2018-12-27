@@ -3,12 +3,14 @@
     <!-- User Interface controls -->
     <b-row>
       <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
-          <!--  <span class="input-group-btn">
-               <button class="btn btn-info btn-lg" :disabled="!filter">
-                   <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span> -->
+          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="orderFilterOption">
+              <option value="id">ID</option>
+              <option value="name">Name</option>
+              <option value="status">Status</option>
+              </select>
+       </div>
+      <div class="input-group col-md-3">
+          <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
        </div>
     </b-row>
 <br>
@@ -19,7 +21,6 @@
              :fields="fields"
              :current-page="currentPage"
              :per-page="perPage"
-             :filter="filter"
              @filtered="onFiltered"
              @row-clicked="expandAdditionalInfo"
              class="table table-striped table-hover"
@@ -70,6 +71,7 @@ export default {
       perPage: 20,
       totalRows: items.length,
       filter: null,
+      orderFilterOption:'id',
       modalInfo: { title: '', content: '' }
     }
   },
@@ -80,7 +82,7 @@ export default {
     toShowOrderList: function ()
     {
         $("#order-flow").css("display", "none");
-        axios.get('/order/orderlist').then(response => {
+        axios.get('/order/order/list').then(response => {
             this.items = response.data;
             $(".loader").css("display", "none");
         }).catch(function(error) {
@@ -118,6 +120,18 @@ export default {
               $("#order-flow").html('No records to show');
               console.log(error);
           });
+    },
+    searchOrder: function()
+    {
+        if (this.filter != '') {
+                axios.post('/order/search/list', { orderField: this.filter }).then(response => {
+                    this.items = response.data;
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
+            }
     }
   }
 }

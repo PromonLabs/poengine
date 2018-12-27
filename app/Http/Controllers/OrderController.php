@@ -30,19 +30,15 @@ class OrderController extends Controller
         return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons', 'xml'));
     }
 
-    public function orderIdList(Request $request)
-    {
-        $orderIdLists = ProcessInstance::where('id', 'like', $request->get('orderId').'%')->take(20)->get(['id']);
-        $idList = '';
-        foreach ($orderIdLists as $orderIdList) {
-            $idList .= '<option value="'.$orderIdList->id.'">'.$orderIdList->id.'</option>';
-        }
-        return $idList;
-    }
-
     public function update(Request $request)
     {
         ProcessInstance::whereId($request->get('orderId'))->update(['note' => $request->get('orderNote')]);
         return response()->json('true');
+    }
+
+    public function orderSearchList(Request $request)
+    {
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')->where('id', 'like', strval($request->get('orderField')).'%')->orWhere('id', $request->get('orderField'))->get();
+        return $orderDetails;
     }
 }
