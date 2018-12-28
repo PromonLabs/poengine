@@ -2,14 +2,27 @@
   <b-container fluid>
     <!-- User Interface controls -->
     <b-row>
-     <!--  <div class="input-group col-md-3">
-          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="orderFilterOption">
-              <option value="id">ID </option>
-              <option value="name">Acount ID</option>
-              <option value="status">Status</option>
+       <div class="input-group col-md-3">
+          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="orderFilterOption" v-on:change="orderFieldSelection">
+              <option value="id">Order ID </option>
+              <option value="account_id">Acount ID</option>
+              <option value="process_instance_status_id">Status</option>
               </select>
-       </div> -->
-      <div class="input-group col-md-3">
+       </div>
+      <div class="input-group col-md-3" v-if="isStatus">
+          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="filter" v-on:change="orderStatusSelection">
+              <option value="0">New </option>
+              <option value="1">Pending</option>
+              <option value="2">Waiting</option>
+              <option value="3">Processing</option>
+              <option value="4">Failed</option>
+              <option value="5">Complete</option>
+              <option value="6">Complete with Failures</option>
+              <option value="7">Canceled</option>
+              <option value="8">Waiting suborder</option>
+              </select>
+       </div>
+      <div class="input-group col-md-3" v-else>
           <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
        </div>
     </b-row>
@@ -72,7 +85,8 @@ export default {
       totalRows: items.length,
       filter: null,
       orderFilterOption:'id',
-      modalInfo: { title: '', content: '' }
+      modalInfo: { title: '', content: '' },
+      isStatus:false,
     }
   },
   mounted() {
@@ -124,7 +138,7 @@ export default {
     searchOrder: function()
     {
         if (this.filter != '') {
-                axios.post('/order/search/list', { orderField: this.filter }).then(response => {
+                axios.post('/order/search/list', { orderField: this.filter, orderFilterOption: this.orderFilterOption }).then(response => {
                     this.items = response.data;
                 }).catch(function(error) {
                     console.log(error);
@@ -132,6 +146,21 @@ export default {
         } else {
             this.toShowOrderList();
         }
+    },
+    orderFieldSelection: function()
+    {
+        if(this.orderFilterOption == 'process_instance_status_id'){
+            this.isStatus = true;
+            this.toShowOrderList();
+        } else {
+            this.isStatus = false;
+            this.filter = null;
+            this.toShowOrderList();
+        }
+    },
+    orderStatusSelection: function()
+    {
+       this.searchOrder();
     }
   }
 }

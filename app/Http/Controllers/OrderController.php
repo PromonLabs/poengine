@@ -40,14 +40,9 @@ class OrderController extends Controller
 
     public function orderSearchList(Request $request)
     {
-        $orderField = $request->get('orderField');
-        if (is_numeric($orderField)) {
-            $orderDetails = ProcessInstance::with('processStatus')->with('process')
-            ->where(DB::raw('CAST(id AS TEXT)'), 'ilike', '%'. $orderField . '%')
-            ->orWhere(DB::raw('CAST(account_id AS TEXT)'), 'ilike', '%'. $orderField . '%')->take(100)->get();
-        } else {
-
-        }
+        $orderDetails = ProcessInstance::with('processStatus')->with('process')
+        ->where(DB::raw('CAST('.$request->get("orderFilterOption").' AS TEXT)'), 'ilike', '%'. $request->get("orderField") . '%')
+        ->take(100)->get();
         return $orderDetails;
     }
 }
