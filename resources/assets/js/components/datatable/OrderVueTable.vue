@@ -3,27 +3,17 @@
     <!-- User Interface controls -->
     <b-row>
        <div class="input-group col-md-3">
-          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="orderFilterOption" v-on:change="orderFieldSelection">
-              <option value="id">Order ID </option>
-              <option value="account_id">Acount ID</option>
-              <option value="process_instance_status_id">Status</option>
-              </select>
+          <select class="form-control" style="height: 40px; border-radius:5px;" v-model="orderFilterOption" v-on:change="orderFieldSelection">
+              <option v-for="orderFilter in orderFilters" :value="orderFilter.value" :key="orderFilter.value">{{ orderFilter.text }}</option>
+          </select>
        </div>
       <div class="input-group col-md-3" v-if="isStatus">
-          <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="filter" v-on:change="orderStatusSelection">
-              <option value="0">New </option>
-              <option value="1">Pending</option>
-              <option value="2">Waiting</option>
-              <option value="3">Processing</option>
-              <option value="4">Failed</option>
-              <option value="5">Complete</option>
-              <option value="6">Complete with Failures</option>
-              <option value="7">Canceled</option>
-              <option value="8">Waiting suborder</option>
-              </select>
+          <select class="form-control" style="height: 40px; border-radius:5px;margin-left:10px" v-model="filter" v-on:change="orderStatusSelection">
+              <option v-for="statusId in statusIds" :value="statusId.value" :key="statusId.value">{{ statusId.text }}</option>
+          </select>
        </div>
       <div class="input-group col-md-3" v-else>
-          <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
+          <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;margin-left:10px">
        </div>
     </b-row>
 <br>
@@ -87,6 +77,24 @@ export default {
       orderFilterOption:'id',
       modalInfo: { title: '', content: '' },
       isStatus:false,
+      orderFilters: [
+            {value: 'id', text: 'Order ID'},
+            {value: 'account_id', text: 'Account ID'},
+            {value: 'process_instance_status_id', text: 'Status'},
+            ],
+
+      statusIds: [
+            {value: '', text: 'Select Status'},
+            {value: '0', text: 'New'},
+            {value: '1', text: 'Pending'},
+            {value: '2', text: 'Waiting'},
+            {value: '3', text: 'Processing'},
+            {value: '4', text: 'Failed'},
+            {value: '5', text: 'Complete'},
+            {value: '6', text: 'Complete with Failures'},
+            {value: '7', text: 'Canceled'},
+            {value: '8', text: 'Waiting suborder'},
+                ],
     }
   },
   mounted() {
@@ -151,6 +159,7 @@ export default {
     {
         if(this.orderFilterOption == 'process_instance_status_id'){
             this.isStatus = true;
+            this.filter = '';
             this.toShowOrderList();
         } else {
             this.isStatus = false;
