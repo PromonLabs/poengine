@@ -78,8 +78,8 @@ export default {
       modalInfo: { title: '', content: '' },
       isStatus:false,
       orderFilters: [
-            {value: 'id', text: 'Order ID'},
-            {value: 'account_id', text: 'Account ID'},
+            {value: 'id', text: 'ID'},
+            {value: 'account_id', text: 'Account'},
             {value: 'process_instance_status_id', text: 'Status'},
             ],
 
