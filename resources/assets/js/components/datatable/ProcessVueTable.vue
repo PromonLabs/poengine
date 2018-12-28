@@ -99,7 +99,7 @@ export default {
     searchProcess: function()
     {
         if (this.filter != '') {
-                axios.post('/process/search/list', { processName: this.filter }).then(response => {
+                axios.post('/process/search/list', { processFilter: this.filter }).then(response => {
                     console.log(response.data);
                  this.items = response.data;
                 }).catch(function(error) {

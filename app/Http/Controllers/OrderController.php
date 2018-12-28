@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProcessInstance;
 use App\Models\ActionInstance;
+use App\Models\ActionInstanceStatus;
 use App\Models\offer;
 use PrettyXml\Formatter;
+use DB;
 
 class OrderController extends Controller
 {
@@ -38,7 +40,14 @@ class OrderController extends Controller
 
     public function orderSearchList(Request $request)
     {
-        $orderDetails = ProcessInstance::with('processStatus')->with('process')->where('id', 'like', strval($request->get('orderField')).'%')->orWhere('id', $request->get('orderField'))->get();
+        $orderField = $request->get('orderField');
+        if (is_numeric($orderField)) {
+            $orderDetails = ProcessInstance::with('processStatus')->with('process')
+            ->where(DB::raw('CAST(id AS TEXT)'), 'ilike', '%'. $orderField . '%')
+            ->orWhere(DB::raw('CAST(account_id AS TEXT)'), 'ilike', '%'. $orderField . '%')->take(100)->get();
+        } else {
+
+        }
         return $orderDetails;
     }
 }

@@ -2,13 +2,13 @@
   <b-container fluid>
     <!-- User Interface controls -->
     <b-row>
-      <div class="input-group col-md-3">
+     <!--  <div class="input-group col-md-3">
           <select class="form-control" style="height: 40px; border-radius:5px; marin-right:10px" v-model="orderFilterOption">
-              <option value="id">ID</option>
-              <option value="name">Name</option>
+              <option value="id">ID </option>
+              <option value="name">Acount ID</option>
               <option value="status">Status</option>
               </select>
-       </div>
+       </div> -->
       <div class="input-group col-md-3">
           <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
        </div>
@@ -129,9 +129,9 @@ export default {
                 }).catch(function(error) {
                     console.log(error);
                 });
-            } else {
-                this.toShowProcessList();
-            }
+        } else {
+            this.toShowOrderList();
+        }
     }
   }
 }
