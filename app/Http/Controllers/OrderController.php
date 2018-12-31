@@ -8,7 +8,7 @@ use App\Models\ActionInstance;
 use App\Models\ActionInstanceStatus;
 use App\Models\offer;
 use PrettyXml\Formatter;
-use DB;
+
 
 class OrderController extends Controller
 {
@@ -41,8 +41,8 @@ class OrderController extends Controller
     public function orderSearchList(Request $request)
     {
         $orderDetails = ProcessInstance::with('processStatus')->with('process')
-        ->where(DB::raw('CAST('.$request->get("orderFilterOption").' AS TEXT)'), 'ilike', '%'. $request->get("orderField") . '%')
-        ->take(100)->get();
+                            ->orderSearch($request->get("orderFilterOption"), $request->get("orderField"))
+                            ->take(100)->get();
         return $orderDetails;
     }
 }

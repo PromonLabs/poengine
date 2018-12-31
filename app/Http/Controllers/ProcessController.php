@@ -18,8 +18,8 @@ class ProcessController extends Controller
     public function processSearchList(Request $request)
     {
         $processDetails = Process::with('getActions')
-                            ->where('name', 'like', '%'.$request->get('processFilter').'%')
-                            ->orWhere('description', 'like', '%'.$request->get('processFilter').'%')
+                            ->nameSearch($request->get('processFilter'))
+                            ->descriptionSearch($request->get('processFilter'))
                             ->get();
         return $processDetails;
     }
