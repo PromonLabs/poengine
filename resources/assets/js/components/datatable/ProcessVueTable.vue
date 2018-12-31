@@ -3,13 +3,8 @@
     <!-- User Interface controls -->
     <b-row>
       <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
-          <!--  <span class="input-group-btn">
-               <button class="btn btn-info btn-lg" :disabled="!filter">
-                   <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span> -->
-       </div>
+          <input type="search" v-model="filter" v-on:keyup="searchProcess" placeholder="Search for process" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
+      </div>
     </b-row>
     <!-- Main table element -->
     <b-table show-empty
@@ -18,7 +13,6 @@
             :fields="fields"
             :current-page="currentPage"
             :per-page="perPage"
-            :filter="filter"
             @filtered="onFiltered"
             @row-clicked="expandAdditionalInfo"
             class="table table-striped table-hover"
@@ -101,6 +95,19 @@ export default {
             $(".loader").css("display", "none");
             console.log(error);
         });
+    },
+    searchProcess: function()
+    {
+        if (this.filter != '') {
+                axios.post('/process/search/list', { processFilter: this.filter }).then(response => {
+                    console.log(response.data);
+                 this.items = response.data;
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            } else {
+                this.toShowProcessList();
+            }
     }
   }
 }

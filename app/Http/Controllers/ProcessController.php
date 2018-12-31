@@ -15,15 +15,13 @@ class ProcessController extends Controller
         return $processDetails;
     }
 
-    public function processNameList(Request $request)
+    public function processSearchList(Request $request)
     {
-        $processNameLists = Process::where('name', 'like', $request->get('processName').'%')->get(['name']);
-        $processName  = '';
-
-        foreach ($processNameLists as $processNameList) {
-            $processName .= '<option value="'.$processNameList->name.'">'.$processNameList->name.'</option>';
-        }
-        return $processName;
+        $processDetails = Process::with('getActions')
+                            ->where('name', 'like', '%'.$request->get('processFilter').'%')
+                            ->orWhere('description', 'like', '%'.$request->get('processFilter').'%')
+                            ->get();
+        return $processDetails;
     }
 
     public function edit(Request $request)
