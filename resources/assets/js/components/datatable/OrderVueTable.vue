@@ -2,13 +2,18 @@
   <b-container fluid>
     <!-- User Interface controls -->
     <b-row>
-      <div class="input-group col-md-3">
-          <input type="search" v-model="filter" placeholder="Search for order" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;">
-          <!--  <span class="input-group-btn">
-               <button class="btn btn-info btn-lg" :disabled="!filter">
-                   <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span> -->
+       <div class="input-group col-md-3">
+          <select class="form-control" style="height: 40px; border-radius:5px;" v-model="orderFilterOption" v-on:change="orderFieldSelection">
+              <option v-for="orderFilter in orderFilters" :value="orderFilter.value" :key="orderFilter.value">{{ orderFilter.text }}</option>
+          </select>
+       </div>
+      <div class="input-group col-md-3" v-if="isStatus">
+          <select class="form-control" style="height: 40px; border-radius:5px;margin-left:10px" v-model="filter" v-on:change="orderStatusSelection">
+              <option v-for="statusId in statusIds" :value="statusId.value" :key="statusId.value">{{ statusId.text }}</option>
+          </select>
+       </div>
+      <div class="input-group col-md-3" v-else>
+          <input type="search" v-model="filter" placeholder="Search for order" v-on:keyup="searchOrder" value="" autocomplete="off" autofocus="autofocus" spellcheck="false" tabindex="0" height="auto" class="form-control" style="height: 40px; border-radius:5px;margin-left:10px">
        </div>
     </b-row>
 <br>
@@ -19,7 +24,6 @@
              :fields="fields"
              :current-page="currentPage"
              :per-page="perPage"
-             :filter="filter"
              @filtered="onFiltered"
              @row-clicked="expandAdditionalInfo"
              class="table table-striped table-hover"
@@ -70,7 +74,27 @@ export default {
       perPage: 20,
       totalRows: items.length,
       filter: null,
-      modalInfo: { title: '', content: '' }
+      orderFilterOption:'id',
+      modalInfo: { title: '', content: '' },
+      isStatus:false,
+      orderFilters: [
+            {value: 'id', text: 'ID'},
+            {value: 'account_id', text: 'Account'},
+            {value: 'process_instance_status_id', text: 'Status'},
+            ],
+
+      statusIds: [
+            {value: '', text: 'Select Status'},
+            {value: '0', text: 'New'},
+            {value: '1', text: 'Pending'},
+            {value: '2', text: 'Waiting'},
+            {value: '3', text: 'Processing'},
+            {value: '4', text: 'Failed'},
+            {value: '5', text: 'Complete'},
+            {value: '6', text: 'Complete with Failures'},
+            {value: '7', text: 'Canceled'},
+            {value: '8', text: 'Waiting suborder'},
+                ],
     }
   },
   mounted() {
@@ -80,7 +104,7 @@ export default {
     toShowOrderList: function ()
     {
         $("#order-flow").css("display", "none");
-        axios.get('/order/orderlist').then(response => {
+        axios.get('/order/list').then(response => {
             this.items = response.data;
             $(".loader").css("display", "none");
         }).catch(function(error) {
@@ -118,6 +142,34 @@ export default {
               $("#order-flow").html('No records to show');
               console.log(error);
           });
+    },
+    searchOrder: function()
+    {
+        if (this.filter != '') {
+                axios.post('/order/search/list', { orderField: this.filter, orderFilterOption: this.orderFilterOption }).then(response => {
+                    this.items = response.data;
+                }).catch(function(error) {
+                    console.log(error);
+                });
+        } else {
+            this.toShowOrderList();
+        }
+    },
+    orderFieldSelection: function()
+    {
+        if(this.orderFilterOption == 'process_instance_status_id'){
+            this.isStatus = true;
+            this.filter = '';
+            this.toShowOrderList();
+        } else {
+            this.isStatus = false;
+            this.filter = null;
+            this.toShowOrderList();
+        }
+    },
+    orderStatusSelection: function()
+    {
+       this.searchOrder();
     }
   }
 }

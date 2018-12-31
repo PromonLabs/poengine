@@ -22,15 +22,15 @@ Route::middleware('loginSuccess')->group(function () {
     Route::post('/home', 'HomeController@index')->name('login');
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('logout', 'HomeController@logout')->name('logout');
-    Route::post('/order/id/list', 'OrderController@orderIdList')->name('order.id.list');
-    Route::get('/order/orderlist', 'OrderController@orderList')->name('order.orderlist');
+    Route::get('/order/list', 'OrderController@orderList')->name('order.search.list');
     Route::post('/order/flow', 'OrderController@flow')->name('order.flow');
     Route::post('/order/update', 'OrderController@update')->name('order.update');
     Route::get('/process', 'ProcessController@index')->name('process');
-    Route::post('/process/name/list', 'ProcessController@processNameList')->name('process.name.list');
+    Route::post('/process/search/list', 'ProcessController@processSearchList')->name('process.search.list');
     Route::post('/process/list', 'ProcessController@list')->name('process.list');
     Route::post('/process/edit', 'ProcessController@edit')->name('process.edit');
     Route::post('/process/update', 'ProcessController@update')->name('process.update');
+    Route::post('/order/search/list', 'OrderController@orderSearchList')->name('order.search.list');
 });
 
 Route::get('/test', function () {

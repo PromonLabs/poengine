@@ -1,4 +1,4 @@
-<h3>Details for Process: {{ $processDetails[0]->name }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
+<h3>Details for Process: {{ $processDetails[0]->name }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px !important;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
 @if ($processDetails)
     <?php $process = '<table class="table table-striped table-hover">
         <thead class="thead-blue">
