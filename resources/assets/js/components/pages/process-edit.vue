@@ -2,8 +2,8 @@
      <div class="content-wrapper" style="margin-top:20px;">
          <a id="goBack" style="float:right; cursor:pointer; margin:10px;font-size:14px;color:#98BCDE;" @click="$router.go(-1)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
         <section class="content">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row" style="display: block;width: 51%;margin: 0 auto;border: 1px solid #d2d6de;border-radius: 5px;padding: 20px 5px;">
+                <div class="col-md-12">
                     <div class="toshowalert" v-if="seen" style="color:#fff;padding:5px; font-weight:bold; text-align:center; background:green;"></div>
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -32,7 +32,8 @@
                             <option value="1">1</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-default" v-on:click="seen = !seen" @click="toUpdateProcess">Update</button>
+                    <button type="submit" class="btn btn-default" style="float:right; margin-left:10px;" @click="$router.go(-1)">Cancel</button>
+                    <button type="submit" class="btn btn-default"  style="float:right;" v-on:click="seen = !seen" @click="toUpdateProcess">Update</button>
                 </div>
             </div>
         </section>
