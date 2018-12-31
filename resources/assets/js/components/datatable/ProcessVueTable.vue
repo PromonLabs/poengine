@@ -116,8 +116,11 @@ export default {
 .table tr {
     cursor: pointer;
 }
-    .pagination {
+.pagination {
     display:flex !important;
     padding-bottom:40px;
-  }
+}
+.fa-pencil-square-o {
+    font-size:18px !important;
+}
 </style>
