@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class ProcessInstance extends Model
 {
     /**
@@ -32,5 +32,10 @@ class ProcessInstance extends Model
     public function getAddonIdsAttribute($value)
     {
         return explode(',', $value);
+    }
+
+    public function scopeOrderSearch($query, $orderFilterOption, $orderField)
+    {
+        return $query->where(DB::raw('CAST('.$orderFilterOption.' AS TEXT)'), 'ilike', '%'. $orderField . '%');
     }
 }
