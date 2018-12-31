@@ -42,7 +42,7 @@
 				<a href="#"><i class="fa fa-chevron-up"></i></a>
 			</div> --><!-- end go-up -->
     </div> <!-- end all -->
-       
+
 	</body>
 </html>
 </template>

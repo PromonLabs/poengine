@@ -24,4 +24,14 @@ class Process extends Model
     {
         return $this->belongsToMany(Action::class, 'step', 'process_id', 'action_id')->orderBy('step', 'asc');
     }
+
+    public function scopeNameSearch($query, $processFilter)
+    {
+        return $query->where('name', 'like', '%'.$processFilter.'%');
+    }
+
+    public function scopeDescriptionSearch($query, $processFilter)
+    {
+        return $query->orWhere('description', 'like', '%'.$processFilter.'%');
+    }
 }
