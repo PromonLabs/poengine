@@ -104,7 +104,7 @@ export default {
     toShowOrderList: function ()
     {
         $("#order-flow").css("display", "none");
-        axios.get('/order/order/list').then(response => {
+        axios.get('/order/list').then(response => {
             this.items = response.data;
             $(".loader").css("display", "none");
         }).catch(function(error) {
