@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
-        <title>PO Engine Dashboard</title>
+        <title>Work Flow Engine - Dashboard</title>
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link href=" {{ mix('css/app.css') }}" rel="stylesheet">
     </head>
