@@ -60,8 +60,7 @@
         {
             axios.post('/process/list', { processName: name }).then(response => {
                this.item = response.data[0];
-               console.log(this.items);
-            }).catch(function(error) {
+               }).catch(function(error) {
                 console.log(error);
             });
         }

@@ -51,17 +51,6 @@
         font-weight:normal !important;
     }
 </style>
-<!-- jQuery 3 -->
-<script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/assets/dist/js/pages/dashboard2.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/assets/dist/js/demo.js"></script>
-<script src="/assets/js/app.js"></script>
 <script>
     export default {}
 </script>

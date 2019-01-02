@@ -1,4 +1,5 @@
 <template>
+<div class="col-xs-12 col-md-12" id="order-default">
   <b-container fluid>
     <!-- User Interface controls -->
     <b-row>
@@ -44,6 +45,7 @@
     </b-modal>
 
   </b-container>
+  </div>
 </template>
 <style>
 .pagination {
@@ -53,6 +55,7 @@
 </style>
 <script>
 const items = [];
+//const eventOrderFlow = new Vue() // Single event hub
 export default {
   data () {
     return {
@@ -134,8 +137,9 @@ export default {
         $("#order-default").css("display", "none");
         $(".loader").css("display", "block");
           axios.post('/order/flow',{ orderId: row.id}).then(response => {
-              $("#order-flow").html(response.data);
-              $("#order-flow").css("display", "block");
+              this.$root.$emit('viewOrderFlowData', response.data);
+
+           //   $("#order-flow").css("display", "block");
               $(".loader").css("display", "none");
           }).catch(function (error) {
               $(".loader").css("display", "none");

@@ -33,6 +33,3 @@ Route::middleware('loginSuccess')->group(function () {
     Route::post('/order/search/list', 'OrderController@orderSearchList')->name('order.search.list');
 });
 
-Route::get('/test', function () {
-    return view('welcome');
-})->name('test');

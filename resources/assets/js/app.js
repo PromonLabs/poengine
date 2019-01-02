@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 Vue.use(BootstrapVue);
 
@@ -23,6 +24,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 Vue.component('app-header', require('./components/layouts/header.vue'));
 Vue.component('app-footer', require('./components/layouts/footer.vue'));
 Vue.component('order-datatable', require('./components/datatable/OrderVueTable.vue'));
+Vue.component('order-flow', require('./components/pages/OrderFlow.vue'));
 Vue.component('process-datatable', require('./components/datatable/ProcessVueTable.vue'));
 Vue.component('order-list', require('./components/OrderList.vue'));
 Vue.component('b-modal', bModal);
