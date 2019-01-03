@@ -77,7 +77,7 @@
     }
   },
     mounted() {
-        this.toShowOrders();
+        //this.toShowOrders();
     },
     methods: {
         searchOnClick: function(event) {
