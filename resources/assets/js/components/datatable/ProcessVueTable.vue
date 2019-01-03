@@ -63,6 +63,7 @@ export default {
   methods: {
     toShowProcessList: function ()
     {
+        $(".loader").css("display", "block");
         axios.get('/process').then(response => {
             this.items = response.data;
             $(".loader").css("display", "none");
