@@ -24,6 +24,7 @@
         <div class="col-xs-12 col-md-12" style="margin-top:20px;">
             <div id="process-details" style="margin-bottom: 100px;"></div>
         </div>
+        <div class="loader" style="display:none; z-index:1000; position:absolute; top:60%; left:50%"></div>
     </section>
     <!-- /.content -->
     <div style="clear:both;"></div>
