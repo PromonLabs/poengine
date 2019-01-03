@@ -23,7 +23,7 @@ class OrderController extends Controller
         $orderActionDetails = ActionInstance::with('actionStatus')->with('action')->whereProcessInstanceId($request->get('orderId'))->orderBy('step', 'asc')->get();
         $offerDetails = ProcessInstance::with('offer')->whereId($request->get('orderId'))->first();
 
-        $addons = '';
+        $addons = [];
         if ($offerDetails && $offerDetails->addon_ids && $offerDetails->addon_ids[0] !='') {
             $addons = Offer::whereId($offerDetails->addon_ids[0])->get();
         }
