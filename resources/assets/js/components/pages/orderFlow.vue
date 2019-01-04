@@ -47,7 +47,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Note</th><td><textarea :id="txt_note" :class="this.offerDetails.id" rows="3" cols="40" disabled="disabled" v-model="this.offerDetails.note"></textarea>
+                        <th>Note</th><td><textarea rows="3" cols="40" :disabled="this.validated" v-model="this.offerDetails.note"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -152,7 +152,8 @@
       EditNoteSaveButton: {
       text: 'Edit Note'
     },
-      editNote: true
+      editNote: true,
+      validated:true,
     }
   },
     mounted() {
@@ -190,11 +191,14 @@
       this.editNote = !this.editNote;
       this.EditNoteSaveButton.text = this.editNote ? 'Edit Note' : 'Save Note';
       if (this.EditNoteSaveButton.text == 'Save Note') {
-        axios.post('/order/update', { orderId: $("#txt_note").attr("class"), orderNote:this.offerDetails.note }).then(response => {
+        this.validated = false;
+        axios.post('/order/update', { orderId: this.offerDetails.id, orderNote:this.offerDetails.note }).then(response => {
             console.log(response.data);
         }).catch(function(error) {
             console.log(error);
         });
+    } else {
+        this.validated = true;
     }
     }
     }
