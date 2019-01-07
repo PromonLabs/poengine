@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="this.OfferDetailsId!=null">
     <div v-if="showModal">
     <transition name="modal">
       <div class="modal-mask">
@@ -22,8 +22,12 @@
     </transition>
   </div>
 
-<div class="col-xs-6 col-md-6" style="margin-top:20px;">
-    <h3>Order Flow for {{ this.OfferDetailsId }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
+<div class="col-xs-12 col-md-12" style="margin-top:20px;">
+    <h3>Order Flow for {{ this.OfferDetailsId }}
+    <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
+    </h3>
+
     <table class="table table-striped table-hover">
         <thead class="thead-blue">
             <tr>
@@ -231,9 +235,13 @@
         });
     }
 
+    },
+    returnToList: function ()
+    {
+        this.$root.$emit('oderListSeen', true);
+    }
+    }
 
-    }
-    }
 }
 </script>
 <style>

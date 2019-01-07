@@ -39,10 +39,6 @@
       </b-col>
     </b-row>
 
-    <!-- Info modal -->
-    <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
-      <pre>{{ modalInfo.content }}</pre>
-    </b-modal>
 
   </b-container>
   </div>
@@ -133,9 +129,10 @@ export default {
     expandAdditionalInfo (row)
     {
         //row._showDetails = !row._showDetails;
-        $("#order-header").css("display", "none");
-        $("#order-default").css("display", "none");
+      //  $("#order-header").css("display", "none");
+       // $("#order-default").css("display", "none");
         $(".loader").css("display", "block");
+         this.$root.$emit('oderListSeen', false);
           axios.post('/order/flow',{ orderId: row.id}).then(response => {
               this.$root.$emit('viewOrderFlowData', response.data);
 
