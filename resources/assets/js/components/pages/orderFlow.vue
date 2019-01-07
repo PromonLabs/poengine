@@ -13,7 +13,7 @@
                 <h4 class="modal-title">Order XML</h4>
               </div>
               <div class="modal-body">
-                <textarea style="width:100%;height:400px;">{{this.xml}}</textarea>
+                <textarea style="width:100%;height:400px;" v-model="this.xml"></textarea>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Note</th><td><textarea rows="3" cols="40" :disabled="this.validated" v-model="this.offerDetails.note"></textarea>
+                        <th>Note</th><td><textarea rows="3" cols="40" :disabled="this.validated" v-model="this.updateOfferDetailsNote"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -163,6 +163,7 @@
       note:null,
       offer:null,
       },
+      updateOfferDetailsNote:null,
       addons:[],
       orderStatus:"",
       i:1,
@@ -182,10 +183,11 @@
   },
     mounted() {
           this.$root.$on('viewOrderFlowData', orderFlowData => {
-              console.log(orderFlowData.xml);
           this.OfferDetailsId = orderFlowData.offerDetails.id;
           this.orderActionDataList = orderFlowData.orderActionDetails;
           this.offerDetails = orderFlowData.offerDetails;
+          this.updateOfferDetailsNote = orderFlowData.offerDetails.note;
+          console.log(this.offerDetails);
           this.addons = orderFlowData.addons;
           this.xml = orderFlowData.xml;
            this.orderStatus = this.orderStatus+'<div id="circle"></div>';
@@ -218,14 +220,18 @@
       this.EditNoteSaveButton.text = this.editNote ? 'Edit Note' : 'Save Note';
       if (this.EditNoteSaveButton.text == 'Save Note') {
         this.validated = false;
-        axios.post('/order/update', { orderId: this.offerDetails.id, orderNote:this.offerDetails.note }).then(response => {
+      } else {
+        this.validated = true;
+    }
+    if (this.validated==false) {
+        axios.post('/order/update', { orderId: this.offerDetails.id, orderNote:this.updateOfferDetailsNote }).then(response => {
             console.log(response.data);
         }).catch(function(error) {
             console.log(error);
         });
-    } else {
-        this.validated = true;
     }
+
+
     }
     }
 }
