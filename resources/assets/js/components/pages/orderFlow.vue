@@ -1,5 +1,27 @@
 <template>
 <div>
+    <div v-if="showModal">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" @click="showModal=false">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Order XML</h4>
+              </div>
+              <div class="modal-body">
+                <textarea style="width:100%;height:400px;">{{this.xml}}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </div>
+
 <div class="col-xs-6 col-md-6" style="margin-top:20px;">
     <h3>Order Flow for {{ this.OfferDetailsId }}<a id="goBack" style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a></h3>
     <table class="table table-striped table-hover">
@@ -37,7 +59,7 @@
                         <th>Updated</th><td>{{ this.offerDetails.updated }}</td>
                     </tr>
                     <tr>
-                        <th>Options</th><td><button type="button" class="skip-order-step-btn small-button" data-toggle="modal" data-target="#showXml" style="cursor:pointer;">Show XML</button>
+                        <th>Options</th><td><button id="show-modal" @click="showModal = true">Show XML</button>
                                 <button id="hide-seen" class="skip-order-step-btn small-button" v-on:click="toggleEditNoteSave" >{{ EditNoteSaveButton.text }}</button>
 
                                 <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
@@ -131,6 +153,7 @@
     export default {
        data () {
     return {
+        showModal: false,
       search: '',
       OfferDetailsId : null,
       orderActionDataList : [],
@@ -154,14 +177,17 @@
     },
       editNote: true,
       validated:true,
+      xml:null,
     }
   },
     mounted() {
           this.$root.$on('viewOrderFlowData', orderFlowData => {
+              console.log(orderFlowData.xml);
           this.OfferDetailsId = orderFlowData.offerDetails.id;
           this.orderActionDataList = orderFlowData.orderActionDetails;
           this.offerDetails = orderFlowData.offerDetails;
           this.addons = orderFlowData.addons;
+          this.xml = orderFlowData.xml;
            this.orderStatus = this.orderStatus+'<div id="circle"></div>';
             for (var i=0;i<this.orderActionDataList.length;i++)
             {
@@ -204,3 +230,22 @@
     }
 }
 </script>
+<style>
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+</style>
+
