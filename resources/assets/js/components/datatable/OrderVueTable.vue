@@ -134,14 +134,10 @@ export default {
     expandAdditionalInfo (row)
     {
         //row._showDetails = !row._showDetails;
-      //  $("#order-header").css("display", "none");
-       // $("#order-default").css("display", "none");
-        $(".loader").css("display", "block");
+         $(".loader").css("display", "block");
          this.$root.$emit('oderListSeen', false);
           axios.post('/order/flow',{ orderId: row.id}).then(response => {
               this.$root.$emit('viewOrderFlowData', response.data);
-
-           //   $("#order-flow").css("display", "block");
               $(".loader").css("display", "none");
           }).catch(function (error) {
               $(".loader").css("display", "none");

@@ -1,6 +1,6 @@
 <template>
 <div v-if="this.OfferDetailsId!=null">
-    <div v-if="showModal">
+ <div v-if="showModal">
     <transition name="modal">
       <div class="modal-mask">
         <div class="modal-wrapper">
@@ -22,69 +22,67 @@
       </div>
     </transition>
   </div>
-
-<div class="col-xs-6 col-md-6" style="padding-left:0px;">
-    <h3>Order Flow for {{ this.OfferDetailsId }}
-
-    </h3>
-
-    <table class="table table-striped table-hover">
-        <thead class="thead-blue">
-            <tr>
-                <th>Sequence</th>
-                <th>Action</th>
-                <th>Status</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody v-for="orderActionData in orderActionDataList" :key='orderActionData.step'>
-
-            <tr>
-                <td>{{ orderActionData.step }}</td>
-                <td>{{ orderActionData.action.name }}</td>
-                <td>{{ orderActionData.action_status.name }}</td>
-                <td>
-                    <div v-if="orderActionData.action_status.name != 'completed' && orderActionData.action_status.name != 'skipped'">
-                         <button type="button" class="skip-order-step-btn small-button">Skip</button>
-                    </div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-</div>
- <div class="col-xs-6 col-md-6" style="padding-right:0px; margin-top:30px;">
-     <h3>
-     <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
+<div class="col-xs-12 col-md-12">
+     <h3>Order Flow for {{ this.OfferDetailsId }}
+    <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
-        </h3>
-    <table class="table table-striped table-hover">
-                <tbody>
-                    <tr>
-                        <th>Created</th><td>{{ this.offerDetails.created }}</td>
-                    </tr>
-                    <tr>
-                        <th>Updated</th><td>{{ this.offerDetails.updated }}</td>
-                    </tr>
-                    <tr>
-                        <th>Options</th><td><button id="show-modal" @click="showModal = true">Show XML</button>
-                                <button id="hide-seen" class="skip-order-step-btn small-button" v-on:click="toggleEditNoteSave" >{{ EditNoteSaveButton.text }}</button>
+    </h3>
+    <div class="col-xs-6 col-md-6" >
+        <table class="table table-striped table-hover">
+            <thead class="thead-blue">
+                <tr>
+                    <th>Sequence</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody v-for="orderActionData in orderActionDataList" :key='orderActionData.step'>
 
-                                <!-- <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
-                                <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Reset</button>
-                                <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button> -->
+                <tr>
+                    <td>{{ orderActionData.step }}</td>
+                    <td>{{ orderActionData.action.name }}</td>
+                    <td>{{ orderActionData.action_status.name }}</td>
+                    <td>
+                        <div v-if="orderActionData.action_status.name != 'completed' && orderActionData.action_status.name != 'skipped'">
+                            <button type="button" class="skip-order-step-btn small-button">Skip</button>
+                        </div>
+                    </td>
+                </tr>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Note</th><td><textarea rows="3" cols="40" :disabled="this.validated" v-model="this.updateOfferDetailsNote"></textarea>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-md-6" >
+        <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr>
+                            <th>Created</th><td>{{ this.offerDetails.created }}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated</th><td>{{ this.offerDetails.updated }}</td>
+                        </tr>
+                        <tr>
+                            <th>Options</th><td><button id="show-modal" @click="showModal = true">Show XML</button>
+                                    <button id="hide-seen" class="skip-order-step-btn small-button" v-on:click="toggleEditNoteSave" >{{ EditNoteSaveButton.text }}</button>
+
+                                    <!-- <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
+                                    <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Reset</button>
+                                    <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button> -->
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Note</th><td><textarea rows="3" cols="40" :disabled="this.validated" v-model="updateOfferDetailsNote"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
 </div>
-<div class="col-xs-6 col-md-6">
-       <div  v-if="this.offerDetails.offer!=null">
+<div class="col-xs-12 col-md-12">
+    <div  v-if="this.offerDetails.offer!=null">
+        <div class="col-xs-6 col-md-6">
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
                     <tr>
@@ -92,17 +90,17 @@
                         <th>Primary offer</th>
                     </tr>
                 </thead>
-                    <tbody v-for="offerDetail in this.offerDetails" :key="offerDetail.id">
+                    <tbody>
                         <tr>
-                            <td>{{ offerDetail.offer.id }}</td>
-                            <td>{{ offerDetail.offer.name }}</td>
+                            <td>{{ this.offerDetails.offer.id }}</td>
+                            <td>{{ this.offerDetails.offer.name }}</td>
                         </tr>
                 </tbody>
             </table>
         </div>
-</div>
-<div class="col-xs-6 col-md-6">
-     <div  v-if="this.addons.length>0">
+    </div>
+    <div  v-if="this.addons.length>0">
+        <div class="col-xs-6 col-md-6">
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
                     <tr>
@@ -117,7 +115,8 @@
                         </tr>
                 </tbody>
             </table>
-     </div>
+        </div>
+    </div>
  </div>
 <div class="col-xs-12 col-md-12" style="margin-top:20px;" id="show-flow">
     <div v-html="OrderStatusId" v-show="playerCreated"></div>
@@ -174,7 +173,7 @@
       note:null,
       offer:null,
       },
-      updateOfferDetailsNote:null,
+      updateOfferDetailsNote:'',
       addons:[],
       orderStatus:"",
       i:1,
@@ -195,27 +194,27 @@
     mounted() {
           this.$root.$on('viewOrderFlowData', orderFlowData => {
           this.OfferDetailsId = orderFlowData.offerDetails.id;
+          console.log(orderFlowData.orderActionDetails);
           this.orderActionDataList = orderFlowData.orderActionDetails;
           this.offerDetails = orderFlowData.offerDetails;
-          this.updateOfferDetailsNote = orderFlowData.offerDetails.note;
-          console.log(this.offerDetails);
           this.addons = orderFlowData.addons;
           this.xml = orderFlowData.xml;
            this.orderStatus = this.orderStatus+'<div id="circle"></div>';
             for (var i=0;i<this.orderActionDataList.length;i++)
             {
+                console.log(this.orderActionDataList[i].action_status.name);
                 if (this.orderActionDataList[i].action_status.name == 'skipped') {
                         this.box_color = 'orange';
                     } else if (this.orderActionDataList[i].action_status.name == 'completed') {
                         this.box_color = 'green';
                     } else {
-                        if (i == 1) {
+                        if (this.i == 1) {
                             this.box_color = 'steelblue';
                         } else {
                             this.box_color = 'red';
                         }
                         this.disableButton = 1;
-                        i++;
+                        this.i++;
                     }
                     this.orderStatus =this.orderStatus+'<hr id="circle-line"></hr><div id="action-step" style="border:3px solid '+this.box_color+'; color:'+this.box_color+';" data-toggle="tooltip" title="'+this.orderActionDataList[i].action_status.description+'"> <div style="background:'+this.box_color+'; color:#fff; padding:5px 0;">'+this.orderActionDataList[i].action_status.name+'</div> <div :id="action-step-div"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;"> STEP '+this.j+'</span><br> '+this.orderActionDataList[i].action_status.name+'</div> </div>';
                     this.j++;
@@ -234,7 +233,8 @@
       } else {
         this.validated = true;
     }
-    if (this.validated==false) {
+    if (this.validated==true) {
+
         axios.post('/order/update', { orderId: this.offerDetails.id, orderNote:this.updateOfferDetailsNote }).then(response => {
             console.log(response.data);
         }).catch(function(error) {
