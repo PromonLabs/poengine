@@ -40,6 +40,10 @@
     </b-row>
 
 
+    <!-- Info modal -->
+    <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
+      <pre>{{ modalInfo.content }}</pre>
+    </b-modal>
   </b-container>
   </div>
 </template>
@@ -102,6 +106,7 @@ export default {
   methods: {
     toShowOrderList: function ()
     {
+        $(".loader").css("display", "block");
         $("#order-flow").css("display", "none");
         axios.get('/order/list').then(response => {
             this.items = response.data;

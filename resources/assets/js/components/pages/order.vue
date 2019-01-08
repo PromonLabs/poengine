@@ -24,7 +24,7 @@
          <!--  Order Flow-->
             <order-flow></order-flow>
         </div>
-        <div class="loader" style="display:none; z-index:1000; position:absolute; top:30%; left:50%"></div>
+        <div class="loader" style="display:none; z-index:1000; position:absolute; top:60%; left:50%"></div>
     </section>
     <!-- /.content -->
   </div>
@@ -77,7 +77,7 @@
     }
   },
     mounted() {
-        this.toShowOrders();
+        //this.toShowOrders();
     },
     created() {
         this.$root.$on('oderListSeen', response=>{

@@ -7,10 +7,11 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
+                  <h4 class="modal-title">Order XML</h4>
                 <button type="button" class="close" @click="showModal=false">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Order XML</h4>
+
               </div>
               <div class="modal-body">
                 <textarea style="width:100%;height:400px;" v-model="this.xml"></textarea>
@@ -22,10 +23,9 @@
     </transition>
   </div>
 
-<div class="col-xs-12 col-md-12" style="margin-top:20px;">
+<div class="col-xs-6 col-md-6" style="padding-left:0px;">
     <h3>Order Flow for {{ this.OfferDetailsId }}
-    <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
+
     </h3>
 
     <table class="table table-striped table-hover">
@@ -53,7 +53,11 @@
         </tbody>
     </table>
 </div>
- <div class="col-xs-6 col-md-6" style="margin-top:20px;">
+ <div class="col-xs-6 col-md-6" style="padding-right:0px; margin-top:30px;">
+     <h3>
+     <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
+        </h3>
     <table class="table table-striped table-hover">
                 <tbody>
                     <tr>
@@ -66,9 +70,9 @@
                         <th>Options</th><td><button id="show-modal" @click="showModal = true">Show XML</button>
                                 <button id="hide-seen" class="skip-order-step-btn small-button" v-on:click="toggleEditNoteSave" >{{ EditNoteSaveButton.text }}</button>
 
-                                <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
+                                <!-- <button type="button" class="skip-order-step-btn small-button" style="cursor:pointer;">Abort</button>
                                 <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Reset</button>
-                                <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button>
+                                <button type="button" class="skip-order-step-btn small-button"  style="cursor:pointer;">Terminate</button> -->
 
                         </td>
                     </tr>
@@ -79,6 +83,7 @@
                 </tbody>
             </table>
 </div>
+<div class="col-xs-6 col-md-6">
        <div  v-if="this.offerDetails.offer!=null">
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
@@ -95,7 +100,8 @@
                 </tbody>
             </table>
         </div>
-
+</div>
+<div class="col-xs-6 col-md-6">
      <div  v-if="this.addons.length>0">
             <table class="table table-striped table-hover">
                 <thead class="thead-blue">
@@ -112,9 +118,10 @@
                 </tbody>
             </table>
      </div>
-     <div class="col-xs-6 col-md-6" style="margin-top:20px;">
-      <div v-html="OrderStatusId" v-show="playerCreated"></div>
-      </div>
+ </div>
+<div class="col-xs-12 col-md-12" style="margin-top:20px;" id="show-flow">
+    <div v-html="OrderStatusId" v-show="playerCreated"></div>
+</div>
 </div>
 </template>
 <style>
