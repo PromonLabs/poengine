@@ -118,7 +118,7 @@
         </div>
     </div>
  </div>
-<div class="col-xs-12 col-md-12" style="margin-top:20px;margin-bottom:20px;" id="show-flow">
+<div class="col-xs-12 col-md-12" style="margin-top:20px;margin-bottom:50px;" id="show-flow">
     <div v-html="OrderStatusId" v-show="playerCreated"></div>
 </div>
 </div>
@@ -216,7 +216,7 @@
                         this.disableButton = 1;
                         this.i++;
                     }
-                    this.orderStatus =this.orderStatus+'<hr id="circle-line"></hr><div id="action-step" style="border:3px solid '+this.box_color+'; color:'+this.box_color+';" data-toggle="tooltip" title="'+this.orderActionDataList[i].action_status.description+'"> <div style="background:'+this.box_color+'; color:#fff; padding:5px 0;">'+this.orderActionDataList[i].action_status.name+'</div> <div :id="action-step-div"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;"> STEP '+this.j+'</span><br> '+this.orderActionDataList[i].action.name+'</div> </div>';
+                    this.orderStatus =this.orderStatus+'<hr id="circle-line"></hr><div id="action-step" style="border:3px solid '+this.box_color+'; color:'+this.box_color+';" data-toggle="tooltip" title="'+this.orderActionDataList[i].action_status.description+'"> <div style="background:'+this.box_color+'; color:#fff; padding:5px 0;">'+this.orderActionDataList[i].action_status.name+'</div> <div id="action-step-div"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;"> STEP '+this.j+'</span><br> '+this.orderActionDataList[i].action.name+'</div> </div>';
                     this.j++;
             }
          this.playerCreated = true;
