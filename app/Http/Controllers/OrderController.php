@@ -21,15 +21,15 @@ class OrderController extends Controller
     public function flow(Request $request)
     {
         $orderActionDetails = ActionInstance::with('actionStatus')->with('action')->whereProcessInstanceId($request->get('orderId'))->orderBy('step', 'asc')->get();
-        $offerDetails = ProcessInstance::with('offer')->whereId($request->get('orderId'))->get();
+        $offerDetails = ProcessInstance::with('offer')->whereId($request->get('orderId'))->first();
 
-        $addons = '';
-        if ($offerDetails && $offerDetails[0]->addon_ids && $offerDetails[0]->addon_ids[0] !='') {
-            $addons = Offer::whereId($offerDetails[0]->addon_ids[0])->get();
+        $addons = [];
+        if ($offerDetails && $offerDetails->addon_ids && $offerDetails->addon_ids[0] !='') {
+            $addons = Offer::whereId($offerDetails->addon_ids[0])->get();
         }
         $formatter = new Formatter();
-        $xml = $formatter->format('<?xml version="1.0" encoding="UTF-8"?>'.$offerDetails[0]->placed_order);
-        return view('pages.order-flow', compact('orderActionDetails', 'offerDetails', 'addons', 'xml'));
+        $xml = $formatter->format('<?xml version="1.0" encoding="UTF-8"?>'.$offerDetails->placed_order);
+        return compact('orderActionDetails', 'offerDetails', 'addons', 'xml');
     }
 
     public function update(Request $request)

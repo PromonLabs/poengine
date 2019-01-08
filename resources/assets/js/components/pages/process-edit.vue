@@ -70,7 +70,6 @@
         toUpdateProcess: function ()
         {
             axios.post('/process/update', { processId: $("#id").val(), processName: $("#name").val(), processDescription:$("#description").val(), processPriority:$("#priority").val(), processXsd:$("#xsd").val(), processCallback:$("#callback").val() }).then(response => {
-                console.log(response.data);
                 $(".toshowalert").text('Updated Successfully');
                 this.seen=true;
             }).catch(function(error) {

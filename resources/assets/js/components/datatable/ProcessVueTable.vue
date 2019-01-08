@@ -88,7 +88,6 @@ export default {
        $("#process-header").css("display", "none");
         $("#process-default").css("display", "none");
         axios.post('/process/list', { processName: row.name }).then(response => {
-            console.log(response.data);
             $("#process-details").html(response.data);
             $("#process-details").css("display", "block");
             $(".loader").css("display", "none");
@@ -101,8 +100,7 @@ export default {
     {
         if (this.filter != '') {
                 axios.post('/process/search/list', { processFilter: this.filter }).then(response => {
-                    console.log(response.data);
-                 this.items = response.data;
+                this.items = response.data;
                 }).catch(function(error) {
                     console.log(error);
                 });

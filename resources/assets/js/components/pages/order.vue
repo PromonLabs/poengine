@@ -16,14 +16,13 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="row">
-            <div class="col-xs-12 col-md-12" id="order-default">
-                <order-datatable></order-datatable>
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-12 col-md-12" style="margin-top:20px;">
-                <div id="order-flow" style="margin-bottom: 100px;"></div>
-            </div>
+        <div class="row" v-if="oderListSeen">
+            <!--  Order list datatable-->
+            <order-datatable></order-datatable>
+        </div>
+        <div class="row" v-else>
+         <!--  Order Flow-->
+            <order-flow></order-flow>
         </div>
         <div class="loader" style="display:none; z-index:1000; position:absolute; top:60%; left:50%"></div>
     </section>
@@ -73,11 +72,17 @@
     export default {
        data () {
     return {
-      search: ''
+      search: '',
+      oderListSeen:true,
     }
   },
     mounted() {
         //this.toShowOrders();
+    },
+    created() {
+        this.$root.$on('oderListSeen', response=>{
+            this.oderListSeen = response;
+        });
     },
     methods: {
         searchOnClick: function(event) {
