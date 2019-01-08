@@ -23,10 +23,10 @@
     </transition>
   </div>
 <div class="col-xs-12 col-md-12">
-     <h3>Order Flow for {{ this.OfferDetailsId }}
+     <h4>Order Flow for {{ this.OfferDetailsId }}
     <a style="float:right; cursor:pointer; font-size:14px;color:#98BCDE;" v-on:click="returnToList()">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Return to list</a>
-    </h3>
+    </h4>
     <div class="col-xs-6 col-md-6" >
         <table class="table table-striped table-hover">
             <thead class="thead-blue">
@@ -57,10 +57,10 @@
         <table class="table table-striped table-hover">
                     <tbody>
                         <tr>
-                            <th>Created</th><td>{{ this.offerDetails.created }}</td>
+                            <th>Created</th><td>{{ this.offerDetails.created | moment("DD.MM.YYYY") }}</td>
                         </tr>
                         <tr>
-                            <th>Updated</th><td>{{ this.offerDetails.updated }}</td>
+                            <th>Updated</th><td>{{ this.offerDetails.updated | moment("DD.MM.YYYY") }}</td>
                         </tr>
                         <tr>
                             <th>Options</th><td><button id="show-modal" @click="showModal = true">Show XML</button>
@@ -118,7 +118,7 @@
         </div>
     </div>
  </div>
-<div class="col-xs-12 col-md-12" style="margin-top:20px;" id="show-flow">
+<div class="col-xs-12 col-md-12" style="margin-top:20px;margin-bottom:20px;" id="show-flow">
     <div v-html="OrderStatusId" v-show="playerCreated"></div>
 </div>
 </div>
@@ -216,7 +216,7 @@
                         this.disableButton = 1;
                         this.i++;
                     }
-                    this.orderStatus =this.orderStatus+'<hr id="circle-line"></hr><div id="action-step" style="border:3px solid '+this.box_color+'; color:'+this.box_color+';" data-toggle="tooltip" title="'+this.orderActionDataList[i].action_status.description+'"> <div style="background:'+this.box_color+'; color:#fff; padding:5px 0;">'+this.orderActionDataList[i].action_status.name+'</div> <div :id="action-step-div"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;"> STEP '+this.j+'</span><br> '+this.orderActionDataList[i].action_status.name+'</div> </div>';
+                    this.orderStatus =this.orderStatus+'<hr id="circle-line"></hr><div id="action-step" style="border:3px solid '+this.box_color+'; color:'+this.box_color+';" data-toggle="tooltip" title="'+this.orderActionDataList[i].action_status.description+'"> <div style="background:'+this.box_color+'; color:#fff; padding:5px 0;">'+this.orderActionDataList[i].action_status.name+'</div> <div :id="action-step-div"><span style="padding:5px 10px; margin:5px 0px; font-weight:bold;"> STEP '+this.j+'</span><br> '+this.orderActionDataList[i].action.name+'</div> </div>';
                     this.j++;
             }
          this.playerCreated = true;
